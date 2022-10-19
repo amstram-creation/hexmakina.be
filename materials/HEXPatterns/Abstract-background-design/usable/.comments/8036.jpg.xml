@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comment version="3.0">
+  <caption>hexagonal frame in scribble and doodle style</caption>
+  <note>hexagonal frame in scribble and doodle style</note>
+  <place/>
+  <categories>
+    <category value="abstract"/>
+    <category value="ink"/>
+    <category value="pen"/>
+    <category value="pencil"/>
+    <category value="scribble"/>
+    <category value="element"/>
+    <category value="collection"/>
+    <category value="set"/>
+    <category value="draw"/>
+    <category value="doodle"/>
+    <category value="drawing"/>
+    <category value="effect"/>
+    <category value="messy"/>
+    <category value="paper"/>
+    <category value="scratch"/>
+    <category value="stain"/>
+    <category value="stroke"/>
+    <category value="grunge"/>
+    <category value="hand"/>
+    <category value="drawn"/>
+    <category value="rough"/>
+    <category value="dirty"/>
+    <category value="outline"/>
+    <category value="stripe"/>
+    <category value="frame"/>
+    <category value="hexagonal"/>
+  </categories>
+</comment>
