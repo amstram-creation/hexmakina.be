@@ -1,0 +1,116 @@
+*{
+  box-sizing: border-box;
+  font-family: monospace;
+  margin:0;
+  padding:0;
+}
+
+body{
+  height:100vh;
+}
+
+section{
+  display:flex;
+  flex-wrap: wrap;
+  gap:10em;
+  padding:2em;
+  height:100%;
+}
+
+body section div{
+  flex:1;
+}
+
+section > div{
+  display:flex;
+  min-width:30em;
+}
+
+section > div.titles{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+h1{font-size:2.4em;  text-align:left; margin-bottom:2em;}
+h1 span{display:block; font-size:0.8em;  text-align:right; }
+
+
+dl{
+  display:flex;
+  flex-wrap: wrap;
+
+}
+
+dt{
+  width:20%;
+  text-align:right;
+  padding-right:1em;
+}
+dd{
+  width:80%;
+}
+
+dl dt.title{
+  width:100%;
+}
+
+
+form{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  gap:3em;
+}
+
+form textarea,
+form input,
+form button{
+  border:1px solid black;
+  padding:0.5em;
+}
+
+form textarea{
+  height:100%;
+}
+form input{
+    height:3em;
+}
+
+form button{
+  margin:0 auto;
+  border-radius: 50%;
+  background:black;
+  width: 5em;
+  height: 5em;
+  color:white;
+}
+
+blockquote p{line-height:1.3em; text-align:right; font-size:1.5em;}
+
+dl dt, dl dd{
+  font-size:1.2em;
+  line-height:1.5em;
+}
+dl dt, dl dd q:before, dl dd q:after{
+  font-weight:bold;
+}
+
+
+q{
+  display:block;
+  text-align:center;
+}
+
+q cite{
+  display:block;
+  text-align:right;
+}
+
+q:before{
+  content:"{";
+  float: left;
+  margin-right: 0.5em;
+}

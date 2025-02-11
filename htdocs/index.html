@@ -1,119 +1,186 @@
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
   <meta name="robots" content="index,nofollow" />
-
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="Content-Language" content="eo" />
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="HexMakina" />
+  <meta name="description"
+    content="Hex Makina – Exploring computation, logic, and interaction at the intersection of technology and humanity." />
+  <meta name="keywords" content="Hex Makina, computation, Turing Machine, AI, technology, philosophy" />
+  <meta name="theme-color" content="#000000" />
 
-  <title>Hex Makina</title>
+  <!-- Open Graph (OG) Meta Tags -->
+  <meta property="og:title" content="Hex Makina" />
+  <meta property="og:description"
+    content="Exploring computation, logic, and interaction at the intersection of technology and humanity." />
+  <meta property="og:image" content="https://hexmakina.com/og-image.jpg" />
+  <meta property="og:url" content="https://hexmakina.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
 
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hex Makina" />
+  <meta name="twitter:description"
+    content="Exploring computation, logic, and interaction at the intersection of technology and humanity." />
+  <meta name="twitter:image" content="https://hexmakina.com/twitter-image.jpg" />
+  <meta name="twitter:site" content="@HexMakina" />
+
+  <!-- Security & Performance -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()" /> <!-- Disable Google FLoC -->
+  <meta http-equiv="Referrer-Policy" content="no-referrer-when-downgrade" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+  <!-- Content Security Policy (CSP) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
+             style-src 'self' 'unsafe-inline'; 
+             img-src 'self' data: https://hexmakina.be; 
+             font-src 'self' data:;
+             connect-src 'self'; 
+             frame-ancestors 'none'; 
+             form-action 'self';
+             upgrade-insecure-requests;" />
+
+  <title>HexMakina</title>
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="_ui/pure-min.css" />
   <link rel="stylesheet" href="_ui/grids-responsive-min.css" />
   <link rel="stylesheet" href="_ui/hexmakina.css" />
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Favicon & Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 </head>
 
 <body>
 
-<div id="hexmakina" class="centered">
+  <div id="hexmakina" class="centered">
 
-  <div id="header" class="centered compact">
-    <h1>{ hex makina</h1>
-    <h2>&mdash; causal agent }</h2>
-  </div>
-
-  <div class="pure-g section" id="intro">
-    <div class="pure-u-1 pure-u-md-12-24" id="turing-quote" >
-      <blockquote>
-        <p>a man,<br/> provided with paper,<br/>pencil and rubber,<br/>and subject to strict discipline,<br/>is in effect a universal machine.</p>
-      </blockquote>
-      <img src="_ui/Alan_Turing_signature.svg" alt="signature of Alan Mathison Turing" />
+    <div id="header" class="centered compact">
+      <h1>{ hex makina }</h1>
+      <h2>&mdash; causal agent</h2>
     </div>
-    <div class="pure-u-1 pure-u-md-12-24" id="turing-machine" >
-      <img src="_ui/turing-machine-bw.png" alt="Visual representation of a Turing Machine"/>
+
+    <div class="pure-g section" id="intro">
+      <div class="pure-u-1 pure-u-md-12-24" id="turing-quote">
+        <blockquote>
+          <p>
+            A man,<br />
+            provided with paper,<br />
+            pencil and rubber,<br />
+            and subject to strict discipline,<br />
+            is in effect a universal machine.
+          </p>
+        </blockquote>
+        <img src="_ui/Alan_Turing_signature.svg" alt="Signature of Alan Mathison Turing" />
+      </div>
+      <div class="pure-u-1 pure-u-md-12-24" id="turing-machine">
+        <img src="_ui/turing-machine-bw.png" alt="Visual representation of a Turing Machine" />
+      </div>
     </div>
-  </div>
 
+    <a class="section-divider" name="process">
+      <span><strong>&#9672;</strong>&#9671;</span>
+      <span>&#9670;<strong>&#9673;</strong></span>
+    </a>
 
-  <a class="section-divider" name="process">
-    <span><strong>&#9714;</strong>&#9713;</span>
-    <span>&#9715;<strong>&#9712;</strong></span>
-  </a>
+    <div class="pure-g" id="touch">
+      <div class="pure-u-lg-12-24 centered compact">
+        <h3 class="pure-u-1">touch</h3>
+        <dl class="pure-g" style="margin:1em">
+          <dt class="pure-u-4-24">c. 1300</dt>
+          <dd class="pure-u-20-24">
+            <q cite="https://www.etymonline.com/word/touch">to make deliberate physical contact</q>
+          </dd>
 
+          <dt class="pure-u-4-24">c. 1400</dt>
+          <dd class="pure-u-20-24">
+            <q cite="https://www.etymonline.com/word/touch">to affect or move mentally or emotionally</q>
+          </dd>
 
-  <div class="pure-g" id="touch">
+          <dt class="pure-u-4-24">c. 1500</dt>
+          <dd class="pure-u-20-24">
+            <q cite="https://www.etymonline.com/word/touch">to affect in a negative way</q>
+          </dd>
 
-    <div class="pure-u-lg-12-24 centered compact">
-      <h3 class="pure-u-1">touch</h3>
-      <dl class="pure-g" style="margin:1em">
-        <dt class="pure-u-4-24">c. 1300</dt>
-        <dd class="pure-u-20-24"><q cite="https://www.etymonline.com/word/touch">to make deliberate physical contact</q></dd>
+          <dt class="pure-u-4-24">c. 1600</dt>
+          <dd class="pure-u-20-24">
+            <q cite="https://www.etymonline.com/word/touch">a slight attack</q>
+          </dd>
 
-        <dt class="pure-u-4-24">c. 1400</dt>
-        <dd class="pure-u-20-24"><q cite="https://www.etymonline.com/word/touch">to affect or move mentally or emotionally</q></dd>
+          <dt class="pure-u-4-24">1884</dt>
+          <dd class="pure-u-20-24">
+            <q cite="https://www.etymonline.com/word/touch">figurative sense of communication</q>
+          </dd>
 
-        <dt class="pure-u-4-24">c. 1500</dt>
-        <dd class="pure-u-20-24"><q cite="https://www.etymonline.com/word/touch">to affect in a negative way</dd>
+          <dt class="pure-u-4-24">1927</dt>
+          <dd class="pure-u-20-24">
+            <q cite="https://www.etymonline.com/word/touch">skill or aptitude in some topic</q>
+          </dd>
 
-        <dt class="pure-u-4-24">c. 1600</dt>
-        <dd class="pure-u-20-24"><q cite="https://www.etymonline.com/word/touch">a slight attack</dd>
+          <dt class="pure-u-4-24">1933</dt>
+          <dd class="pure-u-20-24">
+            <q cite="Carl Gustav Jung">The meeting of two personalities is like the contact of two chemical substances:
+              if there is any reaction, both are transformed.</q>
+          </dd>
 
-        <dt class="pure-u-4-24">1884</dt>
-        <dd class="pure-u-20-24"><q cite="https://www.etymonline.com/word/touch">figurative sense of communication</q></dd>
+          <dt class="pure-u-4-24">1979</dt>
+          <dd class="pure-u-20-24">
+            <q cite="Rough Trade">to mark a file or document</q>
+          </dd>
 
-        <dt class="pure-u-4-24">1927</dt>
-        <dd class="pure-u-20-24"><q cite="https://www.etymonline.com/word/touch">skill or aptitude in some topic</q></dd>
+          <dt class="pure-u-4-24">1981</dt>
+          <dd class="pure-u-20-24">
+            <q cite="Rough Trade">Splintering fragments of conversation, never got down to cold hard facts, all touch
+              but no contact.</q>
+          </dd>
+        </dl>
+      </div>
 
-        <dt class="pure-u-4-24">1933</dt>
-        <dd class="pure-u-20-24"><q cite="Carl Gustav Jung">the meeting of two personalities is like the contact of two chemical substances: if there is any reaction, both are transformed</q></dd>
+      <div class="pure-u-lg-12-24 centered compact">
+        <form class="pure-form pure-g" action="mail.php" method="POST" style="margin-top:5em;">
+          <div class="pure-control-group pure-u-1" style="margin-bottom:2em;">
+            <textarea name="message" rows="5" placeholder="Write your message here..."></textarea>
+          </div>
 
-        <dt class="pure-u-4-24">1979</dt>
-        <dd class="pure-u-20-24"><q cite="Rough Trade">to mark a file or document</q></dd>
+          <div class="pure-control-group pure-u-1 pure-u-md-20-24">
+            <input name="email" type="email" placeholder="Enter your email" style="height:55px; width:100%;"
+              required="required" />
+          </div>
 
-        <dt class="pure-u-4-24">1981</dt>
-        <dd class="pure-u-20-24"><q cite="Rough Trade">splintering fragments of conversation, never got down to cold hard facts, all touch but no contact</q></dd>
-      </dl>
+          <div class="pure-control-group pure-u-1 pure-u-md-4-24" style="text-align:center;">
+            <button type="submit" class="pure-button">Send Message</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="pure-u-lg-12-24 centered compact">
-      <form class="pure-form pure-g" action="mail.php" method="POST" style="margin-top:5em;">
 
-        <div class="pure-control-group pure-u-1" style="margin-bottom:2em;">
-          <!-- <label for="email">message</label> -->
-          <textarea name="message" rows="5" placeholder="">Speak easy</textarea>
-        </div>
+    <a class="section-divider" name="process">
+      <span>&#9672;<strong>&#9671;</strong></span>
+      <span><strong>&#9670;</strong>&#9673;</span>
+    </a>
 
-        <div class="pure-control-group pure-u-1 pure-u-md-20-24">
-          <input name="email" type="email" value="mail | phone | social" style="height:55px; width:100%; "/>
-        </div>
-
-        <div class="pure-control-group pure-u-1 pure-u-md-4-24" style="text-align:center;">
-          <button type="submit" class="pure-button" style="">GO</button>
-        </div>
-
-      </form>
+    <div class="pure-g section" id="legal">
+      <address class="pure-u-1">
+        <strong>Hex Makina</strong><br />
+        BE 0678.421.364<br />
+        1000 Brussels
+      </address>
     </div>
-  </div>
 
-  <a class="section-divider" name="process">
-    <span>&#9714;<strong>&#9713;</strong></span>
-    <span><strong>&#9715;</strong>&#9712;</span>
-  </a>
-
-  <div class="pure-g section" id="legal">
-    <address class="pure-u-1"><strong>Hex Makina</strong><br/>BE 0678.421.364<br/>1000 brussels</address>
-  </div>
-</div><!-- hexmakina-->
+  </div><!-- hexmakina-->
 
 </body>
+
 </html>
