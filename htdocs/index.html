@@ -16,7 +16,7 @@
   <meta property="og:description"
     content="Exploring computation, logic, and interaction at the intersection of technology and humanity.">
   <meta property="og:image" content="/android-chrome-512x512.png">
-  <meta property="og:url" content="https://hexmakina.com">
+  <meta property="og:url" content="https://hexmakina.be">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
 
@@ -31,23 +31,29 @@
   <!-- Content Security Policy (CSP) -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
              script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
-             style-src 'self' 'unsafe-inline'; 
-             img-src 'self' data: https://hexmakina.com; 
-             font-src 'self' data:;
+             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; 
+             img-src 'self' data: https://hexmakina.be; 
+             font-src 'self' data: https://fonts.googleapis.com https://fonts.gstatic.com;
              connect-src 'self'; 
-             form-action 'self';
-             upgrade-insecure-requests;">
+             form-action 'self';">
+             <!-- upgrade-insecure-requests;"> -->
 
   <title>Hex Makina</title>
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="_ui/hexmakina.css">
+  <link rel="stylesheet" href="/_ui/hexmakina.css">
 
   <!-- Favicon & Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -62,16 +68,16 @@
       <article>
         <blockquote>
           <p>
-            A man,<br>
-            provided with paper,<br>
-            pencil and rubber,<br>
-            and subject to strict discipline,<br>
-            is in effect a universal machine.
+            <span>A man,</span>
+            <span>provided with paper,</span>
+            <span>pencil and rubber,</span>
+            <span>and subject to strict discipline,</span>
+            <span>is in effect a universal machine.</span>
           </p>
         </blockquote>
-        <img src="./_ui/Alan_Turing_signature.svg" alt="Signature of Alan Mathison Turing">
+        <img src="/_ui/Alan_Turing_signature.svg" alt="Signature of Alan Mathison Turing" width="200" height="40">
       </article>
-      <img src="android-chrome-192x192.png" alt="Hex Makina Logo">
+      <img src="/android-chrome-192x192.png" alt="Hex Makina Logo" width="192" height="192">
     </section>
 
     <hr class="section-divider">
@@ -110,11 +116,13 @@
       </dl>
 
       <form action="mail.php" method="POST">
-        <label for="message">Message:</label>
+        <label for="message">Message:
         <textarea id="message" name="message" rows="5" placeholder="Write your message here..."></textarea>
+        </label>
 
-        <label for="email">Email:</label>
+        <label for="email">Email:
         <input id="email" name="email" type="email" placeholder="Enter your email" required>
+        </label>
 
         <button type="submit">Send Message</button>
       </form>
@@ -128,7 +136,5 @@
       1000 Brussels
     </address>
   </footer>
-
 </body>
-
 </html>

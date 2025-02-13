@@ -1,4 +1,117 @@
-#intro{
-    display:flex;
-    gap:1rem;
+:root {
+    --small-space: 0.7rem;
+    --mediumm-space: 1.8rem;
+    --large-space: 3.5rem;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    font-family: "Atkinson Hyperlegible", serif;
+}
+
+header,
+footer {
+    background-color: #000;
+    color: white;
+    padding: var(--small-space);
+}
+
+header {
+    margin-bottom: var(--small-space);
+    ;
+}
+
+footer {
+    margin-top: var(--small-space);
+    ;
+}
+
+h1 {
+    font-size: 2.9rem;
+    white-space: nowrap;
+}
+
+h2 {
+    text-align: right;
+    font-size: 2.3rem;
+
+}
+
+header>* {
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: var(--large-space);
+}
+
+#intro span {
+    display: block;
+    font-size:0.9rem;
+}
+@media screen and (min-width:360px) {
+    #intro span {
+        font-size: 1.1rem;
+        ;
+    }
+}
+@media screen and (min-width:400px){
+    #intro span {
+        font-size:1.2rem;;
+    }
+}
+
+#intro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+}
+
+#intro blockquote {
+    padding-left: 0.7rem;
+}
+
+#intro blockquote p span {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#intro article img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+}
+
+#intro article {
+    text-align: right;
+}
+
+#intro>img {
+    border-radius: 50%;
+}
+
+#touch {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+dl {
+    max-width: 32rem;
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    gap: var(--small-space);
+}
+
+dl dt {
+    font-weight: 700;
+    text-align: right;
+}
+
+form label {
+    display: block;
 }
