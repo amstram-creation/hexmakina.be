@@ -1,0 +1,122 @@
+/* =============================
+   HEX MAKINA NORMALIZER
+   ============================= */
+
+/* 1. Set a consistent box model */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    overflow-wrap: break-word;
+  }
+  
+  /* 2. Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* 3. Improve text rendering */
+  body {
+    font-family: system-ui, sans-serif;
+    font-size: var(--size-md);
+    line-height: var(--size-lg);
+    color: var(--fg-primary);
+    background-color: var(--bg-primary);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* 4. Ensure media elements behave properly */
+  img, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 5. Remove default list styles */
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* 6. Normalize heading margins */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: var(--size-xs);
+    line-height: var(--size-xl);
+  }
+  
+  /* 7. Reset default link styles */
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-default);
+  }
+  a:hover {
+    color: var(--highlight);
+  }
+  
+  /* 8. Button and input consistency */
+  button, input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  
+  /* 9. Remove button default styling */
+  button {
+    cursor: pointer;
+    padding: var(--size-xs) var(--size-sm);
+    border-radius: var(--size-sm);
+    background-color: var(--cta);
+    transition: background-color var(--transition-default);
+  }
+  button:hover {
+    background-color: var(--highlight);
+  }
+  
+  /* 10. Ensure form elements are responsive */
+  input, textarea, select {
+    width: 100%;
+    padding: var(--size-xs);
+    border: 1px solid var(--fg-secondary);
+    border-radius: var(--size-sm);
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--highlight);
+  }
+  
+  /* 11. Prevent text overflow */
+  p, span, strong, em {
+    overflow-wrap: break-word;
+  }
+  
+  /* 12. Prevent hidden content from affecting layout */
+  [hidden] {
+    display: none !important;
+  }
+  
+  /* 13. Prevent default table spacing */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    padding: var(--size-xs);
+    text-align: left;
+  }
+  
+  /* 14. Ensure consistent cursor for clickable elements */
+  label, button, select {
+    cursor: pointer;
+  }
+  
+  /* 15. Disable text selection on interactive elements */
+  button, a {
+    user-select: none;
+  }
+  
