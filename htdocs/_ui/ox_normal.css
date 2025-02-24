@@ -57,43 +57,9 @@
     color: var(--highlight);
   }
   
-  /* 8. Button and input consistency */
-  button, input, textarea, select {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    background: transparent;
-    border: none;
-    outline: none;
-  }
+
   
-  /* 9. Remove button default styling */
-  button {
-    cursor: pointer;
-    padding: var(--size-xs) var(--size-sm);
-    border-radius: var(--size-sm);
-    background-color: var(--cta);
-    transition: background-color var(--transition-default);
-  }
-  button:hover {
-    background-color: var(--highlight);
-  }
-  
-  /* 10. Ensure form elements are responsive */
-  input, textarea, select {
-    width: 100%;
-    padding: var(--size-xs);
-    border: 1px solid var(--fg-secondary);
-    border-radius: var(--size-sm);
-  }
-  input:focus, textarea:focus, select:focus {
-    border-color: var(--highlight);
-  }
-  
-  /* 11. Prevent text overflow */
-  p, span, strong, em {
-    overflow-wrap: break-word;
-  }
+
   
   /* 12. Prevent hidden content from affecting layout */
   [hidden] {
@@ -106,7 +72,6 @@
     width: 100%;
   }
   td, th {
-    padding: var(--size-xs);
     text-align: left;
   }
   
@@ -119,4 +84,19 @@
   button, a {
     user-select: none;
   }
-  
+  /* 10. Ensure form elements are responsive */
+
+  input, textarea, select {
+    width: 100%;
+  }
+
+    /* 8. Button and input consistency */
+    button, input, textarea, select {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+    
