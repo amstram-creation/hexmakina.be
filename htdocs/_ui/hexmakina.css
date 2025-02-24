@@ -75,33 +75,11 @@ header h2 {
     text-align: right;
 }
 
-main>img {
-    border-radius: 50%;
-    width: 100%;
-    max-width: var(--addbad-periodic-rem);
-}
-
-main>blockquote>*{
-    /* margin on content because margin auto later */
-    margin:11rem var(--size-md);
-
-    font-size: var(--size-md);
-    line-height: var(--size-lg);
-}
-
-main>blockquote cite {
-    color: var(--fg-secondary);
-    text-align: right;
-    display: block;
-    margin-bottom: var(--size-md);
-}
-
 
 
 section {
     margin-bottom: var(--size-xxl);
     padding: var(--size-sm);
-
 }
 
 button {
@@ -128,13 +106,46 @@ a:hover {
     color: var(--highlight);
 }
 
+/* here starts the custom styles */
+
+main>img {
+    border-radius: 50%;
+    width: 100%;
+    max-width: var(--addbad-periodic-rem);
+}
+
+main>blockquote>*{
+    /* margin on content because margin auto later */
+    margin:var(--size-md);
+
+    font-size: var(--size-md);
+    line-height: var(--size-lg);
+}
+
+main>blockquote cite {
+    color: var(--fg-secondary);
+    text-align: right;
+    display: block;
+    margin-bottom: var(--size-md);
+}
+
+blockquote>*, p, li{
+    font-size: var(--size-md);
+    line-height: var(--size-lg);
+}
+
+main>blockquote,
+main>section:not(:has(article)) {
+    max-width: var(--douglas-adams);
+    margin: var(--addbad-periodic-rem) auto;
+}
 
 
 section:has(article) {
     background-color: var(--bg-primary);
 }
 
-section article {
+article {
     margin-bottom: var(--size-md);
 }
 
@@ -168,12 +179,7 @@ textarea {
     padding: var(--size-xs);
 }
 
-main>section:not(:has(article)),
-main>blockquote,
-main>aside {
-    max-width: var(--douglas-adams);
-    margin: var(--addbad-periodic-rem) auto;
-}
+
 
 @media screen and (min-width:11rem) {
     body {
@@ -187,7 +193,11 @@ main>aside {
         line-height: var(--size-xl);
     }
 
-
+    section h3 {
+        font-size: var(--size-xxl);
+        text-transform: uppercase;
+        margin: var(--size-xxl) 0;
+    }
 
     main>img {
         width: 100%;
@@ -294,10 +304,11 @@ main>aside {
         justify-content: flex-start;
     }
 
-    main>blockquote>* {
+    blockquote>*, p, li{
         font-size: var(--size-lg);
         line-height: var(--size-xl);
     }
+
 }
 
 @media screen and (min-width:calc(6*11rem + 7*1rem)) {
