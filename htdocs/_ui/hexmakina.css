@@ -25,7 +25,7 @@
     --size-xl: 2.236rem;
     --size-xxl: 3.141rem;
 
-    --addbad-periodic-rem: 11rem;
+    --addbad-periodic: 11rem;
 
     --douglas-adams: 42rem;
 
@@ -76,12 +76,6 @@ header h2 {
 }
 
 
-
-section {
-    margin-bottom: var(--size-xxl);
-    padding: var(--size-sm);
-}
-
 button {
     background: var(--cta);
     color: var(--fg-strong);
@@ -111,15 +105,12 @@ a:hover {
 main>img {
     border-radius: 50%;
     width: 100%;
-    max-width: var(--addbad-periodic-rem);
+    max-width: var(--addbad-periodic);
 }
 
-main>blockquote>*{
+main>blockquote>* {
     /* margin on content because margin auto later */
-    margin:var(--size-md);
-
-    font-size: var(--size-md);
-    line-height: var(--size-lg);
+    margin: var(--size-md);
 }
 
 main>blockquote cite {
@@ -129,20 +120,21 @@ main>blockquote cite {
     margin-bottom: var(--size-md);
 }
 
-blockquote>*, p, li{
+p,
+li {
     font-size: var(--size-md);
     line-height: var(--size-lg);
 }
 
 main>blockquote,
-main>section:not(:has(article)) {
+main>section {
     max-width: var(--douglas-adams);
-    margin: var(--addbad-periodic-rem) auto;
+    margin: var(--addbad-periodic) auto;
 }
 
-
-section:has(article) {
+div:has(article) {
     background-color: var(--bg-primary);
+    
 }
 
 article {
@@ -159,27 +151,38 @@ article h4>em {
     font-weight: bold;
 }
 
+h3, p, li, div article {
+    margin:var(--size-xs);
+}
+
 section:has(form) {
     background-color: var(--bg-secondary);
-    min-height:100vh;
+    min-height: 100vh;
 }
-form{
+
+section h3 {
+    border-top: 2px solid var(--fg-strong);
+    font-size: var(--size-xxl);
+    text-transform: uppercase;
+    padding: var(--size-xxl) 0;
+}
+form {
     margin: var(--size-xxl) 0;
     display: flex;
     flex-direction: column;
     gap: var(--size-md);
 }
+
 label {
     display: none;
 }
+
 textarea {
     background-color: var(--bg-primary);
     height: 23rem;
     border: 2px solid var(--fg-strong);
     padding: var(--size-xs);
 }
-
-
 
 @media screen and (min-width:11rem) {
     body {
@@ -193,16 +196,12 @@ textarea {
         line-height: var(--size-xl);
     }
 
-    section h3 {
-        font-size: var(--size-xxl);
-        text-transform: uppercase;
-        margin: var(--size-xxl) 0;
-    }
+
 
     main>img {
         width: 100%;
         margin: var(--size-xxl) auto;
-        max-width: calc(1.5*var(--addbad-periodic-rem));
+        max-width: calc(1.5*var(--addbad-periodic));
     }
 
     section article {
@@ -213,7 +212,7 @@ textarea {
 
     section article h4 {
         background-color: var(--bg-secondary);
-        height: var(--addbad-periodic-rem);
+        height: var(--addbad-periodic);
         aspect-ratio: 1/1;
 
         border: 2px solid var(--fg-strong);
@@ -250,11 +249,6 @@ textarea {
         color: var(--fg-secondary);
         font-size: 0.7em;
     }
-
-    article p {
-        font-size: 1.2em;
-        line-height: 1.3em;
-    }
 }
 
 @media screen and (min-width: calc(2*11rem + 3*1rem)) {
@@ -262,7 +256,9 @@ textarea {
         flex-wrap: nowrap;
         align-items: center;
     }
-    main>blockquote>* {
+
+    p,
+    li {
         font-size: var(--size-lg);
         line-height: var(--size-xl);
     }
@@ -275,69 +271,66 @@ textarea {
     }
 
     main>img {
-        max-width: calc(2*var(--addbad-periodic-rem));
+        max-width: calc(2*var(--addbad-periodic));
     }
 
-    main>blockquote{
+    main>blockquote {
         max-width: var(--douglas-adams);
         margin: 0 auto;
     }
 
+    p,
+    li {
+        font-size: var(--size-lg);
+        line-height: var(--size-xl);
+    }
 
-
-    section:has(article) {
+    div:has(article) {
         display: grid;
-        grid-template-columns: repeat(3, var(--addbad-periodic-rem));
+        grid-template-columns: repeat(3, var(--addbad-periodic));
         gap: var(--size-md);
         justify-content: center;
     }
-    section:has(article) h3 {
+
+    div:has(article) h3 {
         grid-column: 1/-1;
         align-self: end;
         justify-self: center;
         font-size: var(--size-lg);
     }
 
-    section article {
+    div article {
         flex-direction: column;
         align-items: start;
         justify-content: flex-start;
-    }
-
-    blockquote>*, p, li{
-        font-size: var(--size-lg);
-        line-height: var(--size-xl);
     }
 
 }
 
 @media screen and (min-width:calc(6*11rem + 7*1rem)) {
 
-    main>blockquote>* {
+    blockquote>* {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
     }
-    section:has(article) {
-        grid-template-columns: repeat(6, var(--addbad-periodic-rem));
+
+    div:has(article) {
+        grid-template-columns: repeat(6, var(--addbad-periodic));
 
         border-radius: 50%;
         aspect-ratio: 1/1;
     }
-    main>section:has(article) {
-        max-width: var(--douglas-adams);
-        margin: 0 auto;
-    }
+
     section article h4 {
         background-color: transparent;
     }
-
-    section article:nth-child(4) h4,
-    section article:nth-child(5) h4 {
-        background-color: var(--bg-secondary);
-    }
-
-    section article:nth-child(2) h4,
+    section article:nth-child(1) h4,
     section article:last-child h4 {
         background-color: var(--bg-primary);
     }
+    section article:nth-child(3) h4,
+    section article:nth-child(4) h4 {
+        background-color: var(--bg-secondary);
+    }
+
 }
