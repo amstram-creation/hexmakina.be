@@ -26,7 +26,6 @@
     --size-xxl: 3.141rem;
 
     --addbad-periodic-rem: 11rem;
-    --addbad-periodic: 11;
 
     --douglas-adams: 42rem;
 
@@ -39,16 +38,12 @@
 body {
     font-family: monospace;
     color: var(--fg-primary);
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
-    justify-content: space-between;
     background: var(--bg-secondary);
-
-
 }
 
-header, footer {
+header,
+footer {
     text-align: center;
     padding: var(--size-md);
     color: var(--fg-primary);
@@ -57,10 +52,14 @@ header, footer {
 footer {
     background: var(--bg-primary);
 }
+
 header {
     text-align: center;
     font-size: var(--size-xl);
     font-weight: bold;
+    width: 100%;
+    max-width: var(--douglas-adams);
+    margin: 0 auto;
 }
 
 h1,
@@ -71,11 +70,33 @@ h3 {
     margin-bottom: var(--size-sm);
 }
 
-main {
-    max-width: var(--douglas-adams);
-    margin: 0 auto;
-    flex-grow: 1;
+
+header h2 {
+    text-align: right;
 }
+
+main>img {
+    border-radius: 50%;
+    width: 100%;
+    max-width: var(--addbad-periodic-rem);
+}
+
+main>blockquote>*{
+    /* margin on content because margin auto later */
+    margin:11rem var(--size-md);
+
+    font-size: var(--size-md);
+    line-height: var(--size-lg);
+}
+
+main>blockquote cite {
+    color: var(--fg-secondary);
+    text-align: right;
+    display: block;
+    margin-bottom: var(--size-md);
+}
+
+
 
 section {
     margin-bottom: var(--size-xxl);
@@ -108,39 +129,75 @@ a:hover {
 }
 
 
+
 section:has(article) {
     background-color: var(--bg-primary);
 }
 
+section article {
+    margin-bottom: var(--size-md);
+}
 
+article h4 * {
+    display: none;
+}
 
-article h4>*:first-child {
-    display:none;
+article h4>strong,
+article h4>em {
+    display: block;
+    font-weight: bold;
+}
+
+section:has(form) {
+    background-color: var(--bg-secondary);
+    min-height:100vh;
+}
+form{
+    margin: var(--size-xxl) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-md);
+}
+label {
+    display: none;
+}
+textarea {
+    background-color: var(--bg-primary);
+    height: 23rem;
+    border: 2px solid var(--fg-strong);
+    padding: var(--size-xs);
+}
+
+main>section:not(:has(article)),
+main>blockquote,
+main>aside {
+    max-width: var(--douglas-adams);
+    margin: var(--addbad-periodic-rem) auto;
 }
 
 @media screen and (min-width:11rem) {
-    header {
+    body {
         display: flex;
-        flex-wrap: wrap;
-    }
-    header *{
-        display: inline;
-    }
-    header>h2{
-        margin-left:auto;
-        justify-self: end;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
-    section:has(article){
-        display:grid;
-        gap: var(--size-lg);
-        grid-template-columns: var(--addbad-periodic-rem);
-        justify-content: center;
+    header>* {
+        font-size: var(--size-lg);
+        line-height: var(--size-xl);
+    }
+
+
+
+    main>img {
+        width: 100%;
+        margin: var(--size-xxl) auto;
+        max-width: calc(1.5*var(--addbad-periodic-rem));
     }
 
     section article {
         display: flex;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
         gap: var(--size-md);
     }
 
@@ -158,10 +215,11 @@ article h4>*:first-child {
         padding: var(--size-xs);
         color: var(--fg-strong);
     }
-    section article h4>*:first-child  {
-        display:block;
+
+    section article h4>*:first-child {
+        display: block;
     }
-    
+
     section article h4 strong {
         font-size: var(--size-md);
         margin-bottom: var(--size-xs);
@@ -169,56 +227,106 @@ article h4>*:first-child {
         text-transform: uppercase;
         font-size: 5rem;
     }
-    section article h4>*:last-child {
+
+    section article h4 em {
         text-align: center;
         text-transform: lowercase;
         letter-spacing: 2px;
-    } 
+        font-weight: 600;
+    }
 
+    section article h4 em>* {
+        display: block;
+        color: var(--fg-secondary);
+        font-size: 0.7em;
+    }
 
-    
+    article p {
+        font-size: 1.2em;
+        line-height: 1.3em;
+    }
 }
+
 @media screen and (min-width: calc(2*11rem + 3*1rem)) {
+    section article {
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    main>blockquote>* {
+        font-size: var(--size-lg);
+        line-height: var(--size-xl);
+    }
+}
+
+@media screen and (min-width: calc(3*11rem + 4*1rem)) {
+    header>* {
+        font-size: var(--size-xl);
+        line-height: var(--size-xxl);
+    }
+
+    main>img {
+        max-width: calc(2*var(--addbad-periodic-rem));
+    }
+
+    main>blockquote{
+        max-width: var(--douglas-adams);
+        margin: 0 auto;
+    }
 
 
-    
-    section:has(article){
-        display:grid;
+
+    section:has(article) {
+        display: grid;
+        grid-template-columns: repeat(3, var(--addbad-periodic-rem));
         gap: var(--size-md);
-        grid-template-columns: auto;
         justify-content: center;
     }
-    section article {
-        display: flex;
-        flex-wrap:nowrap;
-        gap: var(--size-md);
-    }
-}
-@media screen and (min-width: calc(3*11rem + 4*1rem)) {
-    section:has(article) {
-        background-color: var(--bg-primary);
-        border-radius:50%;
-        aspect-ratio: 1/1;
-    }
-
-    section:has(article){
-        display:grid;
-        gap: var(--size-md);
-        grid-template-columns: repeat(3, var(--addbad-periodic-rem));
-    }
-    section:has(article) h3{
+    section:has(article) h3 {
         grid-column: 1/-1;
         align-self: end;
         justify-self: center;
+        font-size: var(--size-lg);
     }
+
     section article {
-        display: flex;
-        flex-wrap:wrap;
+        flex-direction: column;
+        align-items: start;
+        justify-content: flex-start;
+    }
+
+    main>blockquote>* {
+        font-size: var(--size-lg);
+        line-height: var(--size-xl);
     }
 }
 
 @media screen and (min-width:calc(6*11rem + 7*1rem)) {
-    section:has(article){
-        grid-template-columns: repeat(6, var(--addbad-periodic-rem));;
+
+    main>blockquote>* {
+        font-size: var(--size-xl);
+        line-height: var(--size-xxl);
+    }
+    section:has(article) {
+        grid-template-columns: repeat(6, var(--addbad-periodic-rem));
+
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+    }
+    main>section:has(article) {
+        max-width: var(--douglas-adams);
+        margin: 0 auto;
+    }
+    section article h4 {
+        background-color: transparent;
+    }
+
+    section article:nth-child(4) h4,
+    section article:nth-child(5) h4 {
+        background-color: var(--bg-secondary);
+    }
+
+    section article:nth-child(2) h4,
+    section article:last-child h4 {
+        background-color: var(--bg-primary);
     }
 }
