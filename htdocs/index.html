@@ -61,7 +61,7 @@
         build what works, adapt when required.</p>
     </section>
 
-    <div>
+    <div data-not-exposed>
       <article>
         <h4><span>1</span>
           <strong>A</strong>
@@ -113,12 +113,14 @@
       <h3>Whom</h3>
       <h4>speak easy</h4>
 
-      <p>Let's discuss your project.</p>
-
       <form>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
+        <fieldset>
+          <legend>Let's discuss your project.</legend>
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea>
+        </fieldset>
         <button type="submit">Send</button>
+
       </form>
 
     </section>

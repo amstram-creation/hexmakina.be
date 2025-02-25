@@ -1,18 +1,37 @@
+[data-not-exposed] *::before,
+[data-not-exposed] *::after {
+    content: none;
+}
 
 *::before,
 *::after {
-    color: #aaa;
+    color: var(--bg-secondary);
     text-transform: lowercase;
     line-height: 1rem;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    transition: color 0.5s;
 }
-*::before{
-    display: block;
 
+*:hover::before,
+*:hover::after {
+    color: #AAA;
 }
-*::after{
-float: right;
+
+*::before {
+    display: block;
 }
+
+*::after {
+}
+
+blockquote::before {
+    content: "\003C blockquote\003E";
+}
+
+blockquote::after {
+    content: "\003C/blockquote\003E";
+}
+
 
 section::before {
     content: "\003C section\003E";
@@ -20,54 +39,31 @@ section::before {
 section::after {
     content: "\003C/section\003E";
 }
-textarea::before {
-    content: "\003C textarea\003E";
-}
-textarea::after {
-    content: "\003C/textarea\003E";
-}
 
-blockquote::before {
-    content: "\003C blockquote\003E";
-}
-blockquote::after {
-    content: "\003C/blockquote\003E";
-}/*
+/*
 div::before {
     content: "\003C div\003E";
 }
 div::after {
     content: "\003C/div\003E";
 }*/
+blockquote>p::before,
 section>p::before {
     content: "\003C p\003E";
 }
 
+blockquote>p::after,
 section>p::after {
     content: "\003C/p\003E";
 }
-li::before {
-    content: "\003C li\003E";
-}
 
+li::before {
+    content: "\003Cli\003E";
+}
 li::after {
     content: "\003C/li\003E";
 }
-h1::before {
-    content: "\003C h1\003E";
-}
 
-h1::after {
-    content: "\003C/h1\003E";
-}
-
-h2::before {
-    content: "\003C h2\003E";
-}
-
-h2::after {
-    content: "\003C/h2\003E";
-}
 
 section>h3::before {
     content: "\003C h3\003E";
@@ -76,6 +72,7 @@ section>h3::before {
 section>h3::after {
     content: "\003C/h3\003E";
 }
+
 section>h4::before {
     content: "\003C h4\003E";
 }
@@ -83,3 +80,35 @@ section>h4::before {
 section>h4::after {
     content: "\003C/h4\003E";
 }
+
+form::before {
+    content: "\003C form\003E";
+}
+
+form::after {
+    content: "\003C/form\003E";
+}
+
+fieldset::before {
+    content: "\003C fieldset\003E";
+}
+
+fieldset::after {
+    content: "\003C/fieldset\003E";
+}
+
+legend::before {
+    content: "\003C legend\003E";
+}
+
+legend::after {
+    content: "\003C/legend\003E";
+}
+
+@media speech {
+    /* If a screen reader does respect 'speech' media type (not universally supported) */
+    *::before, *::after {
+      content: none !important;
+    }
+  }
+  
