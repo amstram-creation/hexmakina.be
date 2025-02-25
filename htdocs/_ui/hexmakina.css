@@ -1,4 +1,5 @@
 @import url('ox_normal.css');
+@import url('html_exposed.css');
 
 :root {
     /* Background Colors */
@@ -111,42 +112,42 @@ main>img {
     max-width: var(--addbad-periodic);
 }
 
+section{
+    max-width: var(--douglas-adams);
+    margin: var(--size-md) var(--size-sm);
+}
 
-h3,
+section>h3,
+section>h4,
 section>p,
 blockquote>p,
 li,
 form {
     font-size: var(--ox-font-size);
     line-height: var(--ox-line-height);
-    max-width: var(--douglas-adams);
-    margin: var(--size-md) var(--size-xs);
+
 }
 
-section{
+section {
     margin-top: var(--addbad-periodic);
     margin-bottom: var(--addbad-periodic);
 }
 
 section:not(:has(article)) {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: var(--douglas-adams);
-}
-section h3{
-    margin-bottom: var(--addbad-periodic);
-
 }
 
 div:has(article) {
     padding: var(--size-xxl) var(--size-xs);
     background-color: var(--bg-primary);
     margin: 11rem 0;
-    min-height:60vh;
+    min-height: 60vh;
 }
 
 article h4 {
-    margin-bottom:var(--size-md);
+    margin-bottom: var(--size-md);
 }
 
 article h4 * {
@@ -159,7 +160,7 @@ article h4>em {
     font-weight: bold;
 }
 
-article p{
+article p {
     font-size: var(--size-md);
     line-height: var(--size-lg);
 }
@@ -169,11 +170,19 @@ section:has(form) {
     min-height: 100vh;
 }
 
-section h3 {
+section>h3 {
     border-top: 2px solid var(--fg-strong);
     font-size: var(--size-xxl);
     text-transform: uppercase;
-    padding: var(--size-xxl) 0;
+    padding-top: var(--size-xxl);
+}
+
+section>h3+h4 {
+    text-transform: uppercase;
+    color: var(--fg-secondary);
+    margin-bottom: var(--addbad-periodic);
+    font-weight: 400;
+    letter-spacing: 2px;
 }
 
 form {
@@ -194,11 +203,12 @@ textarea {
 }
 
 @media screen and (min-width:11rem) {
-    :root{
+    :root {
         --ox-font-size: 1.2rem;
         /* --ox-line-height: 1.4rem; */
-    
+
     }
+
     body {
         display: flex;
         flex-direction: column;
@@ -261,9 +271,9 @@ textarea {
     }
 }
 
-@media screen and (min-width: calc(2*11rem + 3*1rem)) {
+@media screen and (min-width: calc(2*11rem + 3*1rem)) and (max-width: calc(3*11rem + 4*1rem)) {
 
-    :root{
+    :root {
         --ox-font-size: 1.4rem;
     }
 
@@ -276,13 +286,14 @@ textarea {
 }
 
 @media screen and (min-width: calc(3*11rem + 4*1rem)) {
-    :root{
+    :root {
         --ox-font-size: 1.6rem;
     }
 
-    header{
-        margin-top:var(--size-xl);
+    header {
+        margin-top: var(--size-xl);
     }
+
     header>* {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
@@ -312,23 +323,21 @@ textarea {
         font-size: var(--size-lg);
     }
 
-    div article {
-        display:initial;
-    }
 
 }
 
 @media screen and (min-width:calc(6*11rem + 7*1rem)) {
 
-    header{
-        margin-top:var(--size-xxl);
+    header {
+        margin-top: var(--size-xxl);
     }
+
     /* keeps growing */
     blockquote p {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
     }
- 
+
     div:has(article) {
         grid-template-columns: repeat(6, var(--addbad-periodic));
     }
