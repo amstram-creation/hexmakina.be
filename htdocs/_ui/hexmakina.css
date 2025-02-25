@@ -185,12 +185,11 @@ section>h3+h4 {
     letter-spacing: 2px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-md);
-}
+fieldset{border:0}
 
+legend{
+    width: 100%;
+}
 label {
     display: none;
 }
@@ -268,6 +267,7 @@ textarea {
         display: block;
         color: var(--fg-secondary);
         font-size: 0.7em;
+        margin-top: var(--size-xs);
     }
 }
 
