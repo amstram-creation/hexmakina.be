@@ -25,8 +25,10 @@
     --size-xl: 2.236rem;
     --size-xxl: 3.141rem;
 
-    --addbad-periodic: 11rem;
+    --ox-font-size: 1rem;
+    --ox-line-height: calc(var(--ox-font-size)*1.5);
 
+    --addbad-periodic: 11rem;
     --douglas-adams: 42rem;
 
     /* Transition Timing */
@@ -34,6 +36,7 @@
     --transition-default: 0.618s;
     --transition-slow: 1.732s;
 }
+
 
 body {
     font-family: monospace;
@@ -108,37 +111,46 @@ main>img {
     max-width: var(--addbad-periodic);
 }
 
-main>blockquote>* {
-    /* margin on content because margin auto later */
+
+h3,
+section>p,
+blockquote>p,
+li,
+form {
+    font-size: var(--ox-font-size);
+    line-height: var(--ox-line-height);
+    max-width: var(--douglas-adams);
     margin: var(--size-md);
 }
 
-main>blockquote cite {
-    color: var(--fg-secondary);
-    text-align: right;
-    display: block;
-    margin-bottom: var(--size-md);
+section{
+    margin-top: var(--addbad-periodic);
+    margin-bottom: var(--addbad-periodic);
 }
 
-p,
-li {
-    font-size: var(--size-md);
-    line-height: var(--size-lg);
-}
-
-main>blockquote,
-main>section {
+section:not(:has(article)) {
+    margin-left:auto;
+    margin-right:auto;
     max-width: var(--douglas-adams);
-    margin: var(--addbad-periodic) auto;
+}
+section h3{
+    margin-bottom: var(--addbad-periodic);
+
 }
 
 div:has(article) {
+    padding: var(--size-xxl) var(--size-sm);
     background-color: var(--bg-primary);
-    
+    margin: 11rem 0;
+    min-height:60vh;
 }
 
 article {
     margin-bottom: var(--size-md);
+}
+
+article h4 {
+    margin-bottom:var(--size-md);
 }
 
 article h4 * {
@@ -151,8 +163,9 @@ article h4>em {
     font-weight: bold;
 }
 
-h3, p, li, div article {
-    margin:var(--size-xs);
+article p{
+    font-size: var(--size-md);
+    line-height: var(--size-lg);
 }
 
 section:has(form) {
@@ -166,8 +179,8 @@ section h3 {
     text-transform: uppercase;
     padding: var(--size-xxl) 0;
 }
+
 form {
-    margin: var(--size-xxl) 0;
     display: flex;
     flex-direction: column;
     gap: var(--size-md);
@@ -185,6 +198,11 @@ textarea {
 }
 
 @media screen and (min-width:11rem) {
+    :root{
+        --ox-font-size: 1.2rem;
+        /* --ox-line-height: 1.4rem; */
+    
+    }
     body {
         display: flex;
         flex-direction: column;
@@ -204,13 +222,9 @@ textarea {
         max-width: calc(1.5*var(--addbad-periodic));
     }
 
-    section article {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--size-md);
-    }
 
-    section article h4 {
+
+    div article h4 {
         background-color: var(--bg-secondary);
         height: var(--addbad-periodic);
         aspect-ratio: 1/1;
@@ -225,11 +239,11 @@ textarea {
         color: var(--fg-strong);
     }
 
-    section article h4>*:first-child {
+    div article h4>*:first-child {
         display: block;
     }
 
-    section article h4 strong {
+    div article h4 strong {
         font-size: var(--size-md);
         margin-bottom: var(--size-xs);
         text-align: center;
@@ -237,14 +251,14 @@ textarea {
         font-size: 5rem;
     }
 
-    section article h4 em {
+    div article h4 em {
         text-align: center;
         text-transform: lowercase;
         letter-spacing: 2px;
         font-weight: 600;
     }
 
-    section article h4 em>* {
+    div article h4 em>* {
         display: block;
         color: var(--fg-secondary);
         font-size: 0.7em;
@@ -252,19 +266,27 @@ textarea {
 }
 
 @media screen and (min-width: calc(2*11rem + 3*1rem)) {
-    section article {
+
+    :root{
+        --ox-font-size: 1.4rem;
+    }
+    
+    div article {
+        display: flex;
+        gap: var(--size-md);
         flex-wrap: nowrap;
         align-items: center;
-    }
-
-    p,
-    li {
-        font-size: var(--size-lg);
-        line-height: var(--size-xl);
     }
 }
 
 @media screen and (min-width: calc(3*11rem + 4*1rem)) {
+    :root{
+        --ox-font-size: 1.6rem;
+    }
+
+    header{
+        margin-top:var(--size-xl);
+    }
     header>* {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
@@ -279,18 +301,13 @@ textarea {
         margin: 0 auto;
     }
 
-    p,
-    li {
-        font-size: var(--size-lg);
-        line-height: var(--size-xl);
-    }
-
     div:has(article) {
         display: grid;
         grid-template-columns: repeat(3, var(--addbad-periodic));
         gap: var(--size-md);
         justify-content: center;
     }
+
 
     div:has(article) h3 {
         grid-column: 1/-1;
@@ -300,37 +317,23 @@ textarea {
     }
 
     div article {
-        flex-direction: column;
-        align-items: start;
-        justify-content: flex-start;
+        display:initial;
     }
 
 }
 
 @media screen and (min-width:calc(6*11rem + 7*1rem)) {
 
-    blockquote>* {
+    header{
+        margin-top:var(--size-xxl);
+    }
+    /* keeps growing */
+    blockquote p {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
     }
-
+ 
     div:has(article) {
         grid-template-columns: repeat(6, var(--addbad-periodic));
-
-        border-radius: 50%;
-        aspect-ratio: 1/1;
     }
-
-    section article h4 {
-        background-color: transparent;
-    }
-    section article:nth-child(1) h4,
-    section article:last-child h4 {
-        background-color: var(--bg-primary);
-    }
-    section article:nth-child(3) h4,
-    section article:nth-child(4) h4 {
-        background-color: var(--bg-secondary);
-    }
-
 }
