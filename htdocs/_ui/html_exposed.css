@@ -1,0 +1,85 @@
+
+*::before,
+*::after {
+    color: #aaa;
+    text-transform: lowercase;
+    line-height: 1rem;
+    font-size: 0.9rem;
+}
+*::before{
+    display: block;
+
+}
+*::after{
+float: right;
+}
+
+section::before {
+    content: "\003C section\003E";
+}
+section::after {
+    content: "\003C/section\003E";
+}
+textarea::before {
+    content: "\003C textarea\003E";
+}
+textarea::after {
+    content: "\003C/textarea\003E";
+}
+
+blockquote::before {
+    content: "\003C blockquote\003E";
+}
+blockquote::after {
+    content: "\003C/blockquote\003E";
+}/*
+div::before {
+    content: "\003C div\003E";
+}
+div::after {
+    content: "\003C/div\003E";
+}*/
+section>p::before {
+    content: "\003C p\003E";
+}
+
+section>p::after {
+    content: "\003C/p\003E";
+}
+li::before {
+    content: "\003C li\003E";
+}
+
+li::after {
+    content: "\003C/li\003E";
+}
+h1::before {
+    content: "\003C h1\003E";
+}
+
+h1::after {
+    content: "\003C/h1\003E";
+}
+
+h2::before {
+    content: "\003C h2\003E";
+}
+
+h2::after {
+    content: "\003C/h2\003E";
+}
+
+section>h3::before {
+    content: "\003C h3\003E";
+}
+
+section>h3::after {
+    content: "\003C/h3\003E";
+}
+section>h4::before {
+    content: "\003C h4\003E";
+}
+
+section>h4::after {
+    content: "\003C/h4\003E";
+}
