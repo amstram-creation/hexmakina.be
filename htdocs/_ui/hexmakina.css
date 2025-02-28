@@ -31,6 +31,8 @@
 
     --addbad-periodic: 11rem;
     --douglas-adams: 42rem;
+    --life: 2111;
+    --love: 1835;
 
     /* Transition Timing */
     --transition-fast: 0.2236s;
@@ -112,11 +114,11 @@ main>img {
     max-width: var(--addbad-periodic);
 }
 
-section{
+section, blockquote {
+    margin: var(--addbad-periodic) auto;
     max-width: var(--douglas-adams);
-    margin: var(--size-md) var(--size-sm);
+    padding: var(--size-xs);
 }
-
 section>h3,
 section>h4,
 section>p,
@@ -128,16 +130,7 @@ form {
 
 }
 
-section {
-    margin-top: var(--addbad-periodic);
-    margin-bottom: var(--addbad-periodic);
-}
 
-section:not(:has(article)) {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: var(--douglas-adams);
-}
 
 div:has(article) {
     padding: var(--size-xxl) var(--size-xs);
