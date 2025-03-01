@@ -147,9 +147,10 @@ nav {
     width: 100%;
 
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: end;
     align-items: center;
+
     gap: var(--size-xs);
 }
 
@@ -279,7 +280,10 @@ textarea {
     }
 
 
-
+    nav{
+        flex-direction: row;
+        justify-content: center;
+    }
     main>img {
         width: 100%;
         margin: var(--size-xxl) auto;
@@ -386,6 +390,7 @@ textarea {
     }
 
     nav {
+        bottom: unset;
         top: var(--size-md);
         right: var(--size-md);
         justify-content: end;
