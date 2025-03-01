@@ -41,7 +41,48 @@
     --transition-default: 0.618s;
     --transition-slow: 1.732s;
 }
+/* Dark mode */
+.dark-mode {
+    /* Background Colors */
+    --bg-primary: #1A1D1E;
+    /* Dark void */
+    --bg-secondary: #2A2D2E;
+    /* Dead end */
 
+    /* Text Colors */
+    --fg-primary: #BEEFED;
+    /* Beef Ed */
+    --fg-secondary: #BAFF1E;
+    /* Baffle */
+    --fg-emphasis: #F00BAA;
+    /* Foo bar */
+    --fg-strong: #C0FFEE;
+    /* Coffee */
+    --fg-muted: #DEFEC8;
+    /* Defect */
+
+    /* UI & Interactive Elements */
+    --cta: #FACADE;
+    /* Facade */
+    --warning: #DECADE;
+    /* Decade */
+    --highlight: #F0C0A1;
+    /* Focal */
+
+    /* Spacing & Sizing remain unchanged */
+
+    /* Additional dark mode specific humor */
+    --dark-joke-1: #BADA55;
+    /* Badass */
+    --dark-joke-2: #5CADA8;
+    /* Scada */
+    --dark-joke-3: #D15EA5E;
+    /* Disease */
+    --dark-joke-4: #DECEA5E;
+    /* Decease */
+    --dark-joke-5: #DEFEA7;
+    /* Defeat */
+}
 
 body {
     font-family: monospace;
