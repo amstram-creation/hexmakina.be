@@ -10,11 +10,13 @@
     line-height: 1rem;
     font-size: 0.7rem;
     transition: color 0.5s;
+    display: block;
 }
 
 *:hover::before,
 *:hover::after {
     color: #AAA;
+    color: #1E90FF;
 }
 
 *::before {
