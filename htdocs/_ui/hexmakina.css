@@ -31,6 +31,8 @@
 
     --addbad-periodic: 11rem;
     --douglas-adams: 42rem;
+    --le_shra: 35rem;
+    --mazee: 18rem;
     --life: 2111;
     --love: 1835;
 
@@ -57,6 +59,21 @@ footer {
 
 footer {
     background: var(--bg-primary);
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-lg);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+address {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-lg);
+
 }
 
 header {
@@ -280,6 +297,25 @@ textarea {
         gap: var(--size-md);
         flex-wrap: nowrap;
         align-items: center;
+    }
+
+
+}
+
+@media screen and (min-width: calc(2*11rem + 3*1rem)) {
+
+    footer {
+        border-radius: 50%;
+        width: 100%;
+        aspect-ratio: 1/1;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-lg);
+        align-items: center;
+        justify-content: center;
+        max-width: var(--le_shra);
+        margin: var(--addbad-periodic) auto;
     }
 }
 
