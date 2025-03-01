@@ -41,44 +41,30 @@
     --transition-default: 0.618s;
     --transition-slow: 1.732s;
 }
+
 /* Dark mode */
 .dark-mode {
-    /* Background Colors */
-    --bg-primary: #1A1D1E;
-    /* Dark void */
+    --bg-primary: #211121;
     --bg-secondary: #2A2D2E;
-    /* Dead end */
 
-    /* Text Colors */
-    --fg-primary: #BEEFED;
-    /* Beef Ed */
-    --fg-secondary: #BAFF1E;
-    /* Baffle */
+    --fg-primary: #DEDBAD;
+    --fg-secondary: #BADA55;
     --fg-emphasis: #F00BAA;
-    /* Foo bar */
     --fg-strong: #C0FFEE;
-    /* Coffee */
     --fg-muted: #DEFEC8;
-    /* Defect */
 
-    /* UI & Interactive Elements */
     --cta: #FACADE;
-    /* Facade */
     --warning: #DECADE;
-    /* Decade */
     --highlight: #F0C0A1;
-    /* Focal */
-
-    /* Spacing & Sizing remain unchanged */
 
     /* Additional dark mode specific humor */
     --dark-joke-1: #BADA55;
     /* Badass */
     --dark-joke-2: #5CADA8;
     /* Scada */
-    --dark-joke-3: #D15EA5E;
+    --dark-joke-3: #D5EA5E;
     /* Disease */
-    --dark-joke-4: #DECEA5E;
+    --dark-joke-4: #DCEA5E;
     /* Decease */
     --dark-joke-5: #DEFEA7;
     /* Defeat */
@@ -431,15 +417,15 @@ nav {
 nav button {
     cursor: pointer;
     font-size: var(--size-lg);
-    line-height:var(--size-lg);
-    width:var(--size-xxl);
-    height:var(--size-xxl);
-    text-align:center;
+    line-height: var(--size-lg);
+    width: var(--size-xxl);
+    height: var(--size-xxl);
+    text-align: center;
 }
 
 nav button span {
     display: block;
     width: var(--size-md);
     height: var(--size-md);
-    background-color: black;
+    background-color: var(--fg-primary);
 }
