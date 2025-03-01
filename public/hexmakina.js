@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize based on user preference
   if (
-    localStorage.getItem('darkMode') === 'true' ||
-    window.matchMedia('(prefers-color-scheme: dark)').matches
+    localStorage.getItem('darkMode') != 'false' &&
+    (localStorage.getItem('darkMode') == 'true' ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
     document.body.classList.add('dark-mode');
   }
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'font-size font-larger':
         case 'font-size font-smaller':
           const root = document.documentElement;
-          let delta = 0.1 * (button.dataset.fx.includes('font-larger') ? 1 : -1);
+          let delta =
+            0.1 * (button.dataset.fx.includes('font-larger') ? 1 : -1);
           changeFontSize(root, delta);
           break;
 
