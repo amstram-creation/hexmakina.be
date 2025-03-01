@@ -83,7 +83,7 @@ header h2 {
 
 
 button {
-    background: var(--cta);
+    background: var(--bg-primary);
     color: var(--fg-strong);
     padding: var(--size-sm) var(--size-md);
     border: 2px solid var(--fg-strong);
@@ -114,11 +114,13 @@ main>img {
     max-width: var(--addbad-periodic);
 }
 
-section, blockquote {
+section,
+blockquote {
     margin: var(--addbad-periodic) auto;
     max-width: var(--douglas-adams);
     padding: var(--size-xs);
 }
+
 section>h3,
 section>h4,
 section>p,
@@ -178,11 +180,14 @@ section>h3+h4 {
     letter-spacing: 2px;
 }
 
-fieldset{border:0}
+fieldset {
+    border: 0
+}
 
-legend{
+legend {
     width: 100%;
 }
+
 label {
     display: none;
 }
@@ -334,4 +339,30 @@ textarea {
     div:has(article) {
         grid-template-columns: repeat(6, var(--addbad-periodic));
     }
+}
+
+
+nav {
+    position: fixed;
+    top: var(--size-md);
+    right: var(--size-md);
+    display: flex;
+    gap: var(--size-xs);
+    align-items: center;
+}
+
+nav button {
+    cursor: pointer;
+    font-size: var(--size-lg);
+    line-height:var(--size-lg);
+    width:var(--size-xxl);
+    height:var(--size-xxl);
+    text-align:center;
+}
+
+nav button span {
+    display: block;
+    width: var(--size-md);
+    height: var(--size-md);
+    background-color: black;
 }
