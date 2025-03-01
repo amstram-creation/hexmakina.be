@@ -88,20 +88,8 @@ footer {
     background: var(--bg-primary);
     width: 100%;
     aspect-ratio: 1/1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-lg);
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
 }
 
-address {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-lg);
-
-}
 
 header {
     text-align: center;
@@ -151,6 +139,35 @@ a:hover {
 }
 
 /* here starts the custom styles */
+nav {
+    position: fixed;
+    bottom: var(--size-md);
+
+    height: var(--size-xxl);
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--size-xs);
+}
+
+nav button {
+    cursor: pointer;
+    font-size: var(--size-lg);
+    line-height: var(--size-lg);
+    width: var(--size-xxl);
+    height: var(--size-xxl);
+    text-align: center;
+}
+
+nav button span {
+    display: block;
+    width: var(--size-md);
+    height: var(--size-md);
+    background-color: var(--fg-primary);
+}
 
 main>img {
     border-radius: 50%;
@@ -344,9 +361,17 @@ textarea {
         max-width: var(--le_shra);
         margin: var(--addbad-periodic) auto;
     }
+
+    address {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-lg);
+
+    }
 }
 
 @media screen and (min-width: calc(3*11rem + 4*1rem)) {
+
     :root {
         --ox-font-size: 1.6rem;
     }
@@ -358,6 +383,12 @@ textarea {
     header>* {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
+    }
+
+    nav {
+        top: var(--size-md);
+        right: var(--size-md);
+        justify-content: end;
     }
 
     main>img {
@@ -402,30 +433,4 @@ textarea {
     div:has(article) {
         grid-template-columns: repeat(6, var(--addbad-periodic));
     }
-}
-
-
-nav {
-    position: fixed;
-    top: var(--size-md);
-    right: var(--size-md);
-    display: flex;
-    gap: var(--size-xs);
-    align-items: center;
-}
-
-nav button {
-    cursor: pointer;
-    font-size: var(--size-lg);
-    line-height: var(--size-lg);
-    width: var(--size-xxl);
-    height: var(--size-xxl);
-    text-align: center;
-}
-
-nav button span {
-    display: block;
-    width: var(--size-md);
-    height: var(--size-md);
-    background-color: var(--fg-primary);
 }
