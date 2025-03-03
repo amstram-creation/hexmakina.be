@@ -21,9 +21,12 @@
 
 *::before {
     display: block;
+    text-align:left !important;
 }
 
 *::after {
+    text-align: right !important;
+    display:inline;
 }
 
 blockquote::before {
