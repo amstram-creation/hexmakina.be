@@ -52,6 +52,27 @@ function setupAccessibilityMenu() {
   });
 
   document.body.appendChild(accessibilityMenu);
+
+  // EmailJS
+  emailjs.init({
+    publicKey: 'vaeVbxIew0k4eAJZc',
+  });
+  document
+    .getElementById('contact-form')
+    .addEventListener('submit', function (event) {
+      event.preventDefault();
+      // Sending the form using your service and template IDs
+      emailjs.sendForm('emailjs_hexmakina_be', 'touch_hexmakina', this).then(
+        () => {
+          console.log('SUCCESS!');
+          // Optionally, provide user feedback on success
+        },
+        (error) => {
+          console.log('FAILED...', error);
+          // Optionally, provide user feedback on error
+        }
+      );
+    });
 }
 
 function changeFontSize(root, delta) {
@@ -67,10 +88,9 @@ function changeFontSize(root, delta) {
 
 function toggleDarkModeWithAnnouncement() {
   let html = document.querySelector('html');
-  if(html.getAttribute('data-theme') === 'dark') {
+  if (html.getAttribute('data-theme') === 'dark') {
     html.removeAttribute('data-theme');
-  }
-  else{
+  } else {
     html.setAttribute('data-theme', 'dark');
   }
   const isEnabled = html.hasAttribute('data-theme');

@@ -30,7 +30,9 @@
 
   <!-- Security and resource hints -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https:; style-src 'self'">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com; img-src 'self' https:; style-src 'self'">
+
   <meta name="referrer" content="no-referrer-when-downgrade">
   <link rel="dns-prefetch" href="//hexmakina.be">
   <link rel="preconnect" href="https://hexmakina.be">
@@ -158,13 +160,13 @@
     <h3>Whom</h3>
     <h4>speak easy</h4>
 
-    <form>
+    <form role="form" id="contact-form">
       <fieldset>
         <legend>Let's discuss your project.</legend>
         <label for="message">Message:</label>
         <textarea id="message" name="message" required></textarea>
       </fieldset>
-      <button  data-not-exposed type="submit">Send</button>
+      <button data-not-exposed type="submit">Send</button>
     </form>
 
   </section>
@@ -180,7 +182,9 @@
     </address>
   </footer>
 
-  <script src="./public/hexmakina.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript" src="./public/hexmakina.js"></script>
+
 </body>
 
 </html>
