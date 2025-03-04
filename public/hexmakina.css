@@ -293,6 +293,10 @@ textarea {
         max-width: calc(1.5*var(--addbad-periodic));
     }
 
+    div article {
+        margin-bottom: var(--size-md);
+    }
+
     div article h4 {
         background-color: var(--bg-primary);
         height: var(--addbad-periodic);
@@ -306,6 +310,10 @@ textarea {
 
         padding: var(--size-xs);
         color: var(--fg-strong);
+    }
+
+    article h4:nth-child(2n) {
+        margin-left:auto;
     }
 
     div article h4>*:first-child {
