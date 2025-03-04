@@ -30,6 +30,9 @@
     --ox-font-size: 1rem;
     --ox-line-height: calc(var(--ox-font-size)*1.5);
 
+    --ox-font-ratio: 1;
+    --ox-line-ratio: calc(var(--ox-font-ratio)*1.5);
+
     --addbad-periodic: 11rem;
     --douglas-adams: 42rem;
     --le_shra: 35rem;
@@ -44,7 +47,7 @@
 }
 
 /* Dark mode */
-.dark-mode {
+[data-theme="dark"] {
     --bg-primary: #101010;
     --bg-secondary: #211121;
 
@@ -57,12 +60,12 @@
     --cta: #FACADE;
     --warning: #DECADE;
     --highlight: #F0C0A1;
-
 }
 
 /* font-family: 'Atkinson Hyperlegible', sans-serif; */
 
-html, body {
+html,
+body {
     font-family: monospace;
 
     color: var(--fg-primary);
@@ -92,7 +95,7 @@ header img {
 
 header>img {
     margin: 0 auto;
-    width: var(--mazee);
+    width: 100%;
     max-width: var(--mazee);
 }
 
@@ -112,10 +115,10 @@ h3 {
     color: var(--fg-strong);
     font-weight: bold;
     margin-bottom: var(--size-sm);
-    font-size: calc(var(--ox-font-size)*1.3rem);
-    line-height: calc(var(--ox-line-height)*1.5rem);
-}
 
+    font-size: calc(var(--ox-font-ratio)*1.3rem);
+    line-height: calc(var(--ox-line-ratio)*1.5rem);
+}
 
 h1 {
     text-align: center;
@@ -196,8 +199,8 @@ section>p,
 blockquote>p,
 li,
 form {
-    font-size: var(--ox-font-size);
-    line-height: var(--ox-line-height);
+    font-size: calc(var(--ox-font-size) * var(--ox-font-ratio));
+    line-height: calc(var(--ox-line-height) * var(--ox-line-ratio));
 }
 
 div:has(article) {
@@ -268,7 +271,6 @@ textarea {
 @media screen and (min-width:11rem) {
     :root {
         --ox-font-size: 1.2rem;
-        /* --ox-line-height: 1.4rem; */
     }
 
     header>* {
@@ -276,6 +278,9 @@ textarea {
         line-height: var(--size-xl);
     }
 
+    h1 {
+        font-size: calc(var(--ox-font-ratio) * var(--size-lg));
+    }
 
     nav {
         flex-direction: row;
@@ -348,6 +353,14 @@ textarea {
 
 @media screen and (min-width: calc(2*11rem + 3*1rem)) {
 
+    h1 {
+        font-size: calc(var(--ox-font-ratio) * var(--size-xl));
+    }
+
+    h2 {
+        font-size: calc(var(--ox-font-ratio) * var(--size-lg));
+    }
+
     footer {
         border-radius: 50%;
         width: 100%;
@@ -375,9 +388,18 @@ textarea {
         --ox-font-size: 1.6rem;
     }
 
+
     header>* {
         font-size: var(--size-xl);
         line-height: var(--size-xxl);
+    }
+
+    h1 {
+        font-size: calc(var(--ox-font-ratio) * var(--size-xxl));
+    }
+
+    h2 {
+        font-size: calc(var(--ox-font-ratio) * var(--size-lg));
     }
 
     nav {
