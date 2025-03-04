@@ -3,6 +3,16 @@
     content: none;
 }
 
+/* Ensure screen readers ignore pseudo-elements */
+@media (prefers-reduced-data: no-preference) {
+
+    *::before,
+    *::after {
+        content: none !important;
+        /* Hide for screen readers or reduced-data modes */
+    }
+}
+
 *::before,
 *::after {
     color: var(--bg-secondary);
@@ -10,84 +20,318 @@
     line-height: 1rem;
     font-size: 0.7rem;
     transition: color 0.5s;
-    display: block;
+    display: inline-block;
+    speak: none;
 }
 
 *:hover::before,
 *:hover::after {
-    color: #AAA;
     color: #1E90FF;
 }
 
 *::before {
     display: block;
-    text-align:left !important;
+    text-align: left !important;
 }
 
 *::after {
     text-align: right !important;
-    display:inline;
+    display: inline;
+}
+/* Document Structure */
+html::before {
+    content: "\003Chtml\003E";
+}
+
+html::after {
+    content: "\003C/html\003E";
+}
+
+head::before {
+    content: "\003Chead\003E";
+}
+
+head::after {
+    content: "\003C/head\003E";
+}
+
+body::before {
+    content: "\003Cbody\003E";
+}
+
+body::after {
+    content: "\003C/body\003E";
+}
+
+/* Metadata (typically in <head>) */
+title::before {
+    content: "\003Ctitle\003E";
+}
+
+title::after {
+    content: "\003C/title\003E";
+}
+
+meta::before {
+    content: "\003Cmeta\003E";
+}
+
+meta::after {
+    content: "";
+}
+
+/* Self-closing tag */
+
+link::before {
+    content: "\003Clink\003E";
+}
+
+link::after {
+    content: "";
+}
+
+/* Self-closing tag */
+
+/* Sections */
+section::before {
+    content: "\003Csection\003E";
+}
+
+section::after {
+    content: "\003C/section\003E";
+}
+
+article::before {
+    content: "\003Carticle\003E";
+}
+
+article::after {
+    content: "\003C/article\003E";
+}
+
+aside::before {
+    content: "\003Caside\003E";
+}
+
+aside::after {
+    content: "\003C/aside\003E";
+}
+
+header::before {
+    content: "\003Cheader\003E";
+}
+
+header::after {
+    content: "\003C/header\003E";
+}
+
+footer::before {
+    content: "\003Cfooter\003E";
+}
+
+footer::after {
+    content: "\003C/footer\003E";
+}
+
+main::before {
+    content: "\003Cmain\003E";
+}
+
+main::after {
+    content: "\003C/main\003E";
+}
+
+nav::before {
+    content: "\003Cnav\003E";
+}
+
+nav::after {
+    content: "\003C/nav\003E";
+}
+
+/* Headings */
+h1::before {
+    content: "\003Ch1\003E";
+}
+
+h1::after {
+    content: "\003C/h1\003E";
+}
+
+h2::before {
+    content: "\003Ch2\003E";
+}
+
+h2::after {
+    content: "\003C/h2\003E";
+}
+
+h3::before {
+    content: "\003Ch3\003E";
+}
+
+h3::after {
+    content: "\003C/h3\003E";
+}
+
+h4::before {
+    content: "\003Ch4\003E";
+}
+
+h4::after {
+    content: "\003C/h4\003E";
+}
+
+h5::before {
+    content: "\003Ch5\003E";
+}
+
+h5::after {
+    content: "\003C/h5\003E";
+}
+
+h6::before {
+    content: "\003Ch6\003E";
+}
+
+h6::after {
+    content: "\003C/h6\003E";
+}
+
+/* Text Content */
+p::before {
+    content: "\003Cp\003E";
+}
+
+p::after {
+    content: "\003C/p\003E";
+}
+
+span::before {
+    content: "\003Cspan\003E";
+}
+
+span::after {
+    content: "\003C/span\003E";
+}
+
+div::before {
+    content: "\003Cdiv\003E";
+}
+
+div::after {
+    content: "\003C/div\003E";
 }
 
 blockquote::before {
-    content: "\003C blockquote\003E";
+    content: "\003Cblockquote\003E";
 }
 
 blockquote::after {
     content: "\003C/blockquote\003E";
 }
 
-
-section::before {
-    content: "\003C section\003E";
-}
-section::after {
-    content: "\003C/section\003E";
+pre::before {
+    content: "\003Cpre\003E";
 }
 
-/*
-div::before {
-    content: "\003C div\003E";
-}
-div::after {
-    content: "\003C/div\003E";
-}*/
-blockquote>p::before,
-section>p::before {
-    content: "\003C p\003E";
+pre::after {
+    content: "\003C/pre\003E";
 }
 
-blockquote>p::after,
-section>p::after {
-    content: "\003C/p\003E";
+code::before {
+    content: "\003Ccode\003E";
+}
+
+code::after {
+    content: "\003C/code\003E";
+}
+
+address::before {
+    content: "\003Caddress\003E";
+}
+
+address::after {
+    content: "\003C/address\003E";
+}
+
+/* Emphasis and Formatting */
+strong::before {
+    content: "\003Cstrong\003E";
+}
+
+strong::after {
+    content: "\003C/strong\003E";
+}
+
+em::before {
+    content: "\003Cem\003E";
+}
+
+em::after {
+    content: "\003C/em\003E";
+}
+
+small::before {
+    content: "\003Csmall\003E";
+}
+
+small::after {
+    content: "\003C/small\003E";
+}
+
+/* Lists */
+ul::before {
+    content: "\003Cul\003E";
+}
+
+ul::after {
+    content: "\003C/ul\003E";
+}
+
+ol::before {
+    content: "\003Col\003E";
+}
+
+ol::after {
+    content: "\003C/ol\003E";
 }
 
 li::before {
     content: "\003Cli\003E";
 }
+
 li::after {
     content: "\003C/li\003E";
 }
 
-
-section>h3::before {
-    content: "\003C h3\003E";
+dl::before {
+    content: "\003Cdl\003E";
 }
 
-section>h3::after {
-    content: "\003C/h3\003E";
+dl::after {
+    content: "\003C/dl\003E";
 }
 
-section>h4::before {
-    content: "\003C h4\003E";
+dt::before {
+    content: "\003Cdt\003E";
 }
 
-section>h4::after {
-    content: "\003C/h4\003E";
+dt::after {
+    content: "\003C/dt\003E";
 }
 
+dd::before {
+    content: "\003Cdd\003E";
+}
+
+dd::after {
+    content: "\003C/dd\003E";
+}
+
+/* Forms */
 form::before {
-    content: "\003C form\003E";
+    content: "\003Cform\003E";
 }
 
 form::after {
@@ -95,7 +339,7 @@ form::after {
 }
 
 fieldset::before {
-    content: "\003C fieldset\003E";
+    content: "\003Cfieldset\003E";
 }
 
 fieldset::after {
@@ -103,17 +347,236 @@ fieldset::after {
 }
 
 legend::before {
-    content: "\003C legend\003E";
+    content: "\003Clegend\003E";
 }
 
 legend::after {
     content: "\003C/legend\003E";
 }
 
+input::before {
+    content: "\003Cinput\003E";
+}
+
+input::after {
+    content: "";
+}
+
+/* Self-closing tag */
+
+button::before {
+    content: "\003Cbutton\003E";
+}
+
+button::after {
+    content: "\003C/button\003E";
+}
+
+textarea::before {
+    content: "\003Ctextarea\003E";
+}
+
+textarea::after {
+    content: "\003C/textarea\003E";
+}
+
+select::before {
+    content: "\003Cselect\003E";
+}
+
+select::after {
+    content: "\003C/select\003E";
+}
+
+option::before {
+    content: "\003Coption\003E";
+}
+
+option::after {
+    content: "\003C/option\003E";
+}
+
+label::before {
+    content: "\003Clabel\003E";
+}
+
+label::after {
+    content: "\003C/label\003E";
+}
+
+/* Tables */
+table::before {
+    content: "\003Ctable\003E";
+}
+
+table::after {
+    content: "\003C/table\003E";
+}
+
+thead::before {
+    content: "\003Cthead\003E";
+}
+
+thead::after {
+    content: "\003C/thead\003E";
+}
+
+tbody::before {
+    content: "\003Ctbody\003E";
+}
+
+tbody::after {
+    content: "\003C/tbody\003E";
+}
+
+tfoot::before {
+    content: "\003Ctfoot\003E";
+}
+
+tfoot::after {
+    content: "\003C/tfoot\003E";
+}
+
+tr::before {
+    content: "\003Ctr\003E";
+}
+
+tr::after {
+    content: "\003C/tr\003E";
+}
+
+th::before {
+    content: "\003Cth\003E";
+}
+
+th::after {
+    content: "\003C/th\003E";
+}
+
+td::before {
+    content: "\003Ctd\003E";
+}
+
+td::after {
+    content: "\003C/td\003E";
+}
+
+/* Embedded Content */
+img::before {
+    content: "\003Cimg\003E";
+}
+
+img::after {
+    content: "";
+}
+
+/* Self-closing tag */
+
+figure::before {
+    content: "\003Cfigure\003E";
+}
+
+figure::after {
+    content: "\003C/figure\003E";
+}
+
+figcaption::before {
+    content: "\003Cfigcaption\003E";
+}
+
+figcaption::after {
+    content: "\003C/figcaption\003E";
+}
+
+video::before {
+    content: "\003Cvideo\003E";
+}
+
+video::after {
+    content: "\003C/video\003E";
+}
+
+audio::before {
+    content: "\003Caudio\003E";
+}
+
+audio::after {
+    content: "\003C/audio\003E";
+}
+
+source::before {
+    content: "\003Csource\003E";
+}
+
+source::after {
+    content: "";
+}
+
+/* Self-closing tag */
+
+iframe::before {
+    content: "\003Ciframe\003E";
+}
+
+iframe::after {
+    content: "\003C/iframe\003E";
+}
+
+/* Links */
+a::before {
+    content: "\003Ca\003E";
+}
+
+a::after {
+    content: "\003C/a\003E";
+}
+
+/* Miscellaneous */
+time::before {
+    content: "\003Ctime\003E";
+}
+
+time::after {
+    content: "\003C/time\003E";
+}
+
+mark::before {
+    content: "\003Cmark\003E";
+}
+
+mark::after {
+    content: "\003C/mark\003E";
+}
+
+details::before {
+    content: "\003Cdetails\003E";
+}
+
+details::after {
+    content: "\003C/details\003E";
+}
+
+summary::before {
+    content: "\003Csummary\003E";
+}
+
+summary::after {
+    content: "\003C/summary\003E";
+}
+
+dialog::before {
+    content: "\003Cdialog\003E";
+}
+
+dialog::after {
+    content: "\003C/dialog\003E";
+}
+
 @media speech {
+
     /* If a screen reader does respect 'speech' media type (not universally supported) */
-    *::before, *::after {
-      content: none !important;
+    *::before,
+    *::after {
+        content: none !important;
     }
-  }
-  
+}
