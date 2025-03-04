@@ -1,119 +1,54 @@
+/* Hide tags in specific contexts */
 [data-not-exposed] *::before,
 [data-not-exposed] *::after {
     content: none;
 }
 
-*::before,
-*::after {
-    color: var(--bg-secondary);
+/* Base styles for tagged elements */
+[data-tag]::before,
+[data-tag]::after {
+    color: var(--bg-secondary, #888);
+    /* Fallback color */
     text-transform: lowercase;
     line-height: 1rem;
     font-size: 0.7rem;
     transition: color 0.5s;
-    display: block;
+    /* Consistent display */
+    speak: none;
+    /* Older screen reader fallback */
 }
 
-*:hover::before,
-*:hover::after {
-    color: #AAA;
+/* Hover effect */
+[data-tag]:hover::before,
+[data-tag]:hover::after {
     color: #1E90FF;
 }
 
-*::before {
+/* Tag content */
+[data-tag]::before {
+    content: "<" attr(data-tag) ">";
+    text-align: left;
     display: block;
-    text-align:left !important;
 }
 
-*::after {
-    text-align: right !important;
-    display:inline;
+[data-tag]::after {
+    content: "</" attr(data-tag) ">";
+    text-align: right;
 }
 
-blockquote::before {
-    content: "\003C blockquote\003E";
-}
+/* Accessibility */
+@media (prefers-reduced-data: no-preference) {
 
-blockquote::after {
-    content: "\003C/blockquote\003E";
-}
-
-
-section::before {
-    content: "\003C section\003E";
-}
-section::after {
-    content: "\003C/section\003E";
-}
-
-/*
-div::before {
-    content: "\003C div\003E";
-}
-div::after {
-    content: "\003C/div\003E";
-}*/
-blockquote>p::before,
-section>p::before {
-    content: "\003C p\003E";
-}
-
-blockquote>p::after,
-section>p::after {
-    content: "\003C/p\003E";
-}
-
-li::before {
-    content: "\003Cli\003E";
-}
-li::after {
-    content: "\003C/li\003E";
-}
-
-
-section>h3::before {
-    content: "\003C h3\003E";
-}
-
-section>h3::after {
-    content: "\003C/h3\003E";
-}
-
-section>h4::before {
-    content: "\003C h4\003E";
-}
-
-section>h4::after {
-    content: "\003C/h4\003E";
-}
-
-form::before {
-    content: "\003C form\003E";
-}
-
-form::after {
-    content: "\003C/form\003E";
-}
-
-fieldset::before {
-    content: "\003C fieldset\003E";
-}
-
-fieldset::after {
-    content: "\003C/fieldset\003E";
-}
-
-legend::before {
-    content: "\003C legend\003E";
-}
-
-legend::after {
-    content: "\003C/legend\003E";
+    [data-tag]::before,
+    [data-tag]::after {
+        content: none !important;
+    }
 }
 
 @media speech {
-    /* If a screen reader does respect 'speech' media type (not universally supported) */
-    *::before, *::after {
-      content: none !important;
+
+    [data-tag]::before,
+    [data-tag]::after {
+        content: none !important;
     }
-  }
-  
+}

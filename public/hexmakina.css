@@ -62,7 +62,7 @@
 
 /* font-family: 'Atkinson Hyperlegible', sans-serif; */
 
-body {
+html, body {
     font-family: monospace;
 
     color: var(--fg-primary);
@@ -75,7 +75,6 @@ section {
     max-width: var(--douglas-adams);
     margin: 0 auto;
     min-height: 100vh;
-    border: 1px solid red;
     padding: var(--size-xs);
 }
 
@@ -93,6 +92,8 @@ header img {
 
 header>img {
     margin: 0 auto;
+    width: var(--mazee);
+    max-width: var(--mazee);
 }
 
 header blockquote p {
@@ -268,7 +269,6 @@ textarea {
     :root {
         --ox-font-size: 1.2rem;
         /* --ox-line-height: 1.4rem; */
-
     }
 
     header>* {
@@ -287,8 +287,6 @@ textarea {
         margin: var(--size-xxl) auto;
         max-width: calc(1.5*var(--addbad-periodic));
     }
-
-
 
     div article h4 {
         background-color: var(--bg-primary);
@@ -367,7 +365,6 @@ textarea {
     address {
         display: flex;
         flex-direction: column;
-        gap: var(--size-lg);
 
     }
 }
