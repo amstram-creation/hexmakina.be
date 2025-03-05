@@ -58,7 +58,7 @@ function setupAccessibilityMenu() {
     publicKey: 'vaeVbxIew0k4eAJZc',
   });
   document
-    .getElementById('contact-form')
+    .getElementById('touch')
     .addEventListener('submit', function (event) {
       event.preventDefault();
       // Sending the form using your service and template IDs
