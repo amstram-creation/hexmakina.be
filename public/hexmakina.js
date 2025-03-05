@@ -14,7 +14,7 @@ document.body.appendChild(announcer);
 document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
   setupAccessibilityMenu();
-  applyTagStyles();
+  HTMLExposed();
   announce('Page loaded');
 });
 
@@ -106,7 +106,7 @@ function announce(message, priority = 'polite') {
   }, 100);
 }
 
-function applyTagStyles() {
+function HTMLExposed() {
   document.querySelectorAll('*').forEach((element) => {
     if (!element.closest('[data-not-exposed]')) {
       element.setAttribute('data-tag', element.tagName.toLowerCase());
