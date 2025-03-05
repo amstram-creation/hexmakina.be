@@ -1,0 +1,12 @@
+@media screen and (min-width:calc(6*11rem + 7*1rem)) {
+
+    /* keeps growing */
+    blockquote p {
+        font-size: var(--size-xl);
+        line-height: var(--size-xxl);
+    }
+
+    div:has(article) {
+        grid-template-columns: repeat(6, var(--addbad-periodic));
+    }
+}

@@ -1,0 +1,264 @@
+:root {
+    /* Background Colors */
+    --bg-primary: #DEDBAD;
+    --bg-secondary: #BADBED;
+
+    /* Text Colors */
+    --fg-primary: #211121;
+    --fg-secondary: #444444;
+    --fg-emphasis: #111111;
+    --fg-strong: #010101;
+    --fg-muted: #101010;
+
+    /* UI & Interactive Elements */
+    --cta: #DABBAD;
+    --warning: #BADDAD;
+    --highlight: #BABE00;
+
+    /* Spacing & Sizing */
+    --size-xs: 0.3rem;
+    --size-sm: 0.7rem;
+    --size-md: 1rem;
+    --size-lg: 1.414rem;
+    --size-xl: 2.236rem;
+    --size-xxl: 3.141rem;
+
+    --ox-font-size: 1rem;
+    --ox-line-height: calc(var(--ox-font-size)*1.5);
+
+    --ox-font-ratio: 1;
+    --ox-line-ratio: calc(var(--ox-font-ratio)*1.5);
+
+    --addbad-periodic: 11rem;
+    --douglas-adams: 42rem;
+    --le_shra: 35rem;
+    --mazee: 18rem;
+    --life: 2111;
+    --love: 1835;
+
+    /* Transition Timing */
+    --transition-fast: 0.2236s;
+    --transition-default: 0.618s;
+    --transition-slow: 1.732s;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+    --bg-primary: #101010;
+    --bg-secondary: #211121;
+
+    --fg-primary: #DEDBAD;
+    --fg-secondary: #BADBED;
+    --fg-emphasis: #F00BAA;
+    --fg-strong: #DEFEC8;
+    --fg-muted: #C0FFEE;
+
+    --cta: #FACADE;
+    --warning: #DECADE;
+    --highlight: #F0C0A1;
+}
+
+/* font-family: 'Atkinson Hyperlegible', sans-serif; */
+
+html,
+body {
+    font-family: monospace;
+
+    color: var(--fg-primary);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+header,
+section {
+    max-width: var(--douglas-adams);
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: var(--size-xs);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header img {
+    border-radius: 50%;
+    width: 100%;
+    max-width: var(--addbad-periodic);
+}
+
+header>img {
+    margin: 0 auto;
+    width: 100%;
+    max-width: var(--mazee);
+}
+
+header blockquote p {
+    text-align: right;
+}
+
+footer {
+    background: var(--bg-secondary);
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--fg-strong);
+    font-weight: bold;
+    margin-bottom: var(--size-sm);
+
+    font-size: calc(var(--ox-font-ratio)*1.3rem);
+    line-height: calc(var(--ox-line-ratio)*1.5rem);
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: right;
+}
+
+
+button {
+    background: var(--bg-secondary);
+    color: var(--fg-strong);
+    padding: var(--size-sm) var(--size-md);
+    border: 2px solid var(--fg-strong);
+    transition: background-color var(--transition-default);
+}
+
+button:hover {
+    background: var(--highlight);
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--fg-strong);
+    border-bottom: 2px solid var(--highlight);
+    transition: color var(--transition-default);
+}
+
+a:hover {
+    color: var(--highlight);
+}
+
+/* here starts the custom styles */
+nav {
+    position: fixed;
+    bottom: var(--size-md);
+    right: var(--size-md);
+    height: var(--size-xxl);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+
+    gap: var(--size-xs);
+}
+
+nav button {
+    cursor: pointer;
+    font-size: var(--size-lg);
+    line-height: var(--size-lg);
+    width: var(--size-xxl);
+    height: var(--size-xxl);
+    text-align: center;
+}
+
+nav button span {
+    display: block;
+    width: var(--size-md);
+    height: var(--size-md);
+    background-color: var(--fg-primary);
+}
+
+
+
+section {
+    margin: var(--addbad-periodic) auto;
+    max-width: var(--douglas-adams);
+    padding: var(--size-xs);
+}
+
+section>h3,
+section>h4,
+section>p,
+blockquote>p,
+li,
+form {
+    font-size: calc(var(--ox-font-size) * var(--ox-font-ratio));
+    line-height: calc(var(--ox-line-height) * var(--ox-line-ratio));
+}
+
+div:has(article) {
+    padding: var(--size-xxl) var(--size-xs);
+    background-color: var(--bg-secondary);
+    margin: 11rem 0;
+    min-height: 60vh;
+}
+
+article h4 {
+    margin-bottom: var(--size-md);
+}
+
+article h4 * {
+    display: none;
+}
+
+article h4>strong,
+article h4>em {
+    display: block;
+    font-weight: bold;
+}
+
+article p {
+    font-size: var(--size-md);
+    line-height: var(--size-lg);
+}
+
+section:has(form) {
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+}
+
+section>h3 {
+    border-top: 2px solid var(--fg-strong);
+    font-size: var(--size-xxl);
+    text-transform: uppercase;
+    padding-top: var(--size-xxl);
+}
+
+section>h3+h4 {
+    text-transform: uppercase;
+    color: var(--fg-secondary);
+    margin-bottom: var(--addbad-periodic);
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+fieldset {
+    border: 0
+}
+
+legend {
+    width: 100%;
+}
+
+label {
+    display: none;
+}
+
+textarea {
+    background-color: var(--bg-secondary);
+    height: 23rem;
+    border: 2px solid var(--fg-strong);
+    padding: var(--size-xs);
+}

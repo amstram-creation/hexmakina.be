@@ -1,0 +1,74 @@
+@media screen and (min-width:11rem) {
+    :root {
+        --ox-font-size: 1.2rem;
+    }
+
+    header>* {
+        font-size: var(--size-lg);
+        line-height: var(--size-xl);
+    }
+
+    h1 {
+        font-size: calc(var(--ox-font-ratio) * var(--size-lg));
+    }
+
+    nav {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    main>img {
+        width: 100%;
+        margin: var(--size-xxl) auto;
+        max-width: calc(1.5*var(--addbad-periodic));
+    }
+
+    div article {
+        margin-bottom: var(--size-md);
+    }
+
+    div article h4 {
+        background-color: var(--bg-primary);
+        height: var(--addbad-periodic);
+        aspect-ratio: 1/1;
+
+        border: 2px solid var(--fg-strong);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        padding: var(--size-xs);
+        color: var(--fg-strong);
+    }
+
+    article h4:nth-child(2n) {
+        margin-left: auto;
+    }
+
+    div article h4>*:first-child {
+        display: block;
+    }
+
+    div article h4 strong {
+        font-size: var(--size-md);
+        margin-bottom: var(--size-xs);
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 5rem;
+    }
+
+    div article h4 em {
+        text-align: center;
+        text-transform: lowercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+    }
+
+    div article h4 em>* {
+        display: block;
+        color: var(--fg-secondary);
+        font-size: 0.7em;
+        margin-top: var(--size-xs);
+    }
+}
