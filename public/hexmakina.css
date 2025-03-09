@@ -1,5 +1,8 @@
+/* Base normalization styles */
 @import url('ox_normal.css');
+/* Styles for exposing HTML structure */
 @import url('html_exposed.css');
+/* Responsive layout for different screen sizes */
 @import url('ox-addbad-0.css');
 @import url('ox-addbad-1.css');
 @import url('ox-addbad-2.css');
