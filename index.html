@@ -181,9 +181,16 @@
     </address>
   </footer>
 
+  <template id="accessibility_controls">
+    <nav aria-label="Accessibility Controls" data-not-exposed>
+      <button data-fx="font-size font-larger" aria-label="Increase font size">A</button>
+      <button data-fx="font-size font-smaller" aria-label="Decrease font size">a</button>
+      <button data-fx="dark-mode" aria-label="Toggle dark mode"><span></span></button>
+    </nav>
+  </template>
+
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript" src="./public/hexmakina.js"></script>
-
 </body>
 
 </html>

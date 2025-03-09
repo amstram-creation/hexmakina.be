@@ -85,15 +85,8 @@ function initializeDarkMode() {
 }
 
 function setupAccessibilityMenu() {
-  const accessibilityMenu = document.createElement('nav');
-  accessibilityMenu.setAttribute('aria-label', 'Accessibility Controls');
-  accessibilityMenu.setAttribute('data-not-exposed', '');
-  accessibilityMenu.innerHTML = `
-    <button data-fx="font-size font-larger" aria-label="Increase font size">A</button>
-    <button data-fx="font-size font-smaller" aria-label="Decrease font size">a</button>
-    <button data-fx="dark-mode" aria-label="Toggle dark mode"><span></span></button>
-  `;
-
+  const template = document.getElementById('accessibility_controls');
+  const accessibilityMenu = template.content.firstElementChild.cloneNode(true);
   const actions = {
     'font-size font-larger': () =>
       changeFontSize(document.documentElement, FONT_SIZE_DELTA),
