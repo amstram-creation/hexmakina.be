@@ -15,9 +15,64 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
   setupAccessibilityMenu();
   HTMLExposed();
+  TOC();
   announce('Page loaded');
 });
 
+function TOC() {
+  const nav = document.createElement('nav');
+  const ul = document.createElement('ul');
+
+  // Get all h3 elements on the page
+  const headers = document.querySelectorAll('section h3');
+
+  headers.forEach((header) => {
+    // If the header doesn't have an id, generate one from its text content
+    if (!header.id) {
+      header.id = header.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+    }
+
+    // Create a nav item with a link to the header
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + header.id;
+    a.textContent = header.textContent;
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+
+  nav.appendChild(ul);
+  // Insert the nav at the top of the body
+  document.body.insertBefore(nav, document.body.firstChild);
+
+  // IntersectionObserver to highlight the nav link for the visible h3
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.6, // 60% of the header should be visible
+  };
+
+  const observerCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+      console.log(entry.target.id);
+
+        navLinks.forEach((link) => {
+          // Toggle 'active' class based on matching the header's id
+          link.classList.toggle(
+            'active',
+            link.getAttribute('href') === '#' + entry.target.id
+          );
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  headers.forEach((header) => observer.observe(header));
+}
 function initializeDarkMode() {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const storedDarkMode = localStorage.getItem('darkMode');
@@ -57,22 +112,20 @@ function setupAccessibilityMenu() {
   emailjs.init({
     publicKey: 'vaeVbxIew0k4eAJZc',
   });
-  document
-    .getElementById('touch')
-    .addEventListener('submit', function (event) {
-      event.preventDefault();
-      // Sending the form using your service and template IDs
-      emailjs.sendForm('emailjs_hexmakina_be', 'touch_hexmakina', this).then(
-        () => {
-          console.log('SUCCESS!');
-          // Optionally, provide user feedback on success
-        },
-        (error) => {
-          console.log('FAILED...', error);
-          // Optionally, provide user feedback on error
-        }
-      );
-    });
+  document.getElementById('touch').addEventListener('submit', function (event) {
+    event.preventDefault();
+    // Sending the form using your service and template IDs
+    emailjs.sendForm('emailjs_hexmakina_be', 'touch_hexmakina', this).then(
+      () => {
+        console.log('SUCCESS!');
+        // Optionally, provide user feedback on success
+      },
+      (error) => {
+        console.log('FAILED...', error);
+        // Optionally, provide user feedback on error
+      }
+    );
+  });
 }
 
 function changeFontSize(root, delta) {
