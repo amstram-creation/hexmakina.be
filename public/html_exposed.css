@@ -1,21 +1,28 @@
 /* Hide tags in specific contexts */
 [data-not-exposed] *::before,
 [data-not-exposed] *::after {
-    content: none;
+    content: none !important;
+}
+
+/* Accessibility */
+@media (prefers-reduced-data: no-preference),
+speech {
+
+    [data-tag]::before,
+    [data-tag]::after {
+        content: none !important;
+    }
 }
 
 /* Base styles for tagged elements */
 [data-tag]::before,
 [data-tag]::after {
     color: var(--bg-secondary, #888);
-    /* Fallback color */
     text-transform: lowercase;
-    line-height: 1rem;
     font-size: 0.7rem;
+    line-height: 1rem;
     transition: color 0.5s;
-    /* Consistent display */
     speak: none;
-    /* Older screen reader fallback */
 }
 
 /* Hover effect */
@@ -34,21 +41,4 @@
 [data-tag]::after {
     content: "</" attr(data-tag) ">";
     text-align: right;
-}
-
-/* Accessibility */
-@media (prefers-reduced-data: no-preference) {
-
-    [data-tag]::before,
-    [data-tag]::after {
-        content: none !important;
-    }
-}
-
-@media speech {
-
-    [data-tag]::before,
-    [data-tag]::after {
-        content: none !important;
-    }
 }
