@@ -59,32 +59,11 @@ function setupEmailJs() {
 }
 
 function TOC() {
-  const nav = document.createElement('nav');
-  const ul = document.createElement('ul');
 
-  // Get all h3 elements on the page
-  const headers = document.querySelectorAll('section h3');
+  // Get all section elements on the page
+  const headers = document.querySelectorAll('section');
 
-  headers.forEach((header) => {
-    // If the header doesn't have an id, generate one from its text content
-    if (!header.id) {
-      header.id = header.textContent.trim().toLowerCase().replace(/\s+/g, '-');
-    }
-
-    // Create a nav item with a link to the header
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = '#' + header.id;
-    a.textContent = header.textContent;
-    li.appendChild(a);
-    ul.appendChild(li);
-  });
-
-  nav.appendChild(ul);
-  // Insert the nav at the top of the body
-  document.body.insertBefore(nav, document.body.firstChild);
-
-  // IntersectionObserver to highlight the nav link for the visible h3
+  // IntersectionObserver to highlight the nav link for the visible section
   const navLinks = document.querySelectorAll('nav a');
 
   const observerOptions = {
