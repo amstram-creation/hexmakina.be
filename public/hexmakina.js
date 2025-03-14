@@ -39,8 +39,8 @@ const Kortex = {
     this.accessibility.setupAnnouncer();
 
     this.navigation.observeSectionTOC();
-    this.forms.setupEmailJs();
-    this.debug.exposeHTMLTags();
+    this.setupEmailJs();
+    this.exposeHTMLTags();
 
     this.announce('Page loaded');
   },
@@ -179,55 +179,51 @@ const Kortex = {
     },
   },
 
-  forms: {
-    setupEmailJs() {
-      const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
-      if (!form) return;
+  setupEmailJs() {
+    const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
+    if (!form) return;
 
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
 
-        const script = document.createElement('script');
-        script.src = CONFIG.EMAIL.SCRIPT_SRC;
+      const script = document.createElement('script');
+      script.src = CONFIG.EMAIL.SCRIPT_SRC;
 
-        script.onload = () => {
-          emailjs.init({
-            publicKey: CONFIG.EMAIL.PUBLIC_KEY,
-          });
+      script.onload = () => {
+        emailjs.init({
+          publicKey: CONFIG.EMAIL.PUBLIC_KEY,
+        });
 
-          emailjs
-            .sendForm(CONFIG.EMAIL.SERVICE_ID, CONFIG.EMAIL.TEMPLATE_ID, form)
-            .then(
-              () => {
-                Kortex.announce(
-                  'Your message has been sent successfully!',
-                  'polite'
-                );
-              },
-              (error) => {
-                console.error('Email submission failed:', error);
-                Kortex.announce(
-                  'There was an error sending your message. Please try again later.',
-                  'assertive'
-                );
-              }
-            );
-        };
+        emailjs
+          .sendForm(CONFIG.EMAIL.SERVICE_ID, CONFIG.EMAIL.TEMPLATE_ID, form)
+          .then(
+            () => {
+              Kortex.announce(
+                'Your message has been sent successfully!',
+                'polite'
+              );
+            },
+            (error) => {
+              console.error('Email submission failed:', error);
+              Kortex.announce(
+                'There was an error sending your message. Please try again later.',
+                'assertive'
+              );
+            }
+          );
+      };
 
-        document.head.appendChild(script);
-      });
-    },
+      document.head.appendChild(script);
+    });
   },
 
-  debug: {
-    exposeHTMLTags() {
-      // Consider making this conditional based on a debug flag
-      document.querySelectorAll('*').forEach((element) => {
-        if (!element.closest('[data-not-exposed]')) {
-          element.setAttribute('data-tag', element.tagName.toLowerCase());
-        }
-      });
-    },
+  exposeHTMLTags() {
+    // Consider making this conditional based on a debug flag
+    document.querySelectorAll('*').forEach((element) => {
+      if (!element.closest('[data-not-exposed]')) {
+        element.setAttribute('data-tag', element.tagName.toLowerCase());
+      }
+    });
   },
 };
 
