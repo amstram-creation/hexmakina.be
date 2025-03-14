@@ -12,7 +12,7 @@
         font-size: calc(var(--ox-font-ratio) * var(--size-lg));
     }
 
-    nav {
+    .accessibility-controls {
         flex-direction: row;
         justify-content: center;
     }

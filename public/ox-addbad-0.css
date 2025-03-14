@@ -143,9 +143,13 @@ a {
 a:hover {
     color: var(--highlight);
 }
-
+nav{
+    position: fixed;
+    right:var(--size-md);
+    top: var(--size-xxl);
+}
 /* here starts the custom styles */
-nav {
+.accessibility-controls{
     position: fixed;
     bottom: var(--size-md);
     right: var(--size-md);
@@ -159,7 +163,7 @@ nav {
     gap: var(--size-xs);
 }
 
-nav button {
+.accessibility-controls button {
     cursor: pointer;
     font-size: var(--size-lg);
     line-height: var(--size-lg);
@@ -168,14 +172,12 @@ nav button {
     text-align: center;
 }
 
-nav button span {
+.accessibility-controls button:last-child span {
     display: block;
     width: var(--size-md);
     height: var(--size-md);
     background-color: var(--fg-primary);
 }
-
-
 
 section {
     margin: var(--addbad-periodic) auto;
