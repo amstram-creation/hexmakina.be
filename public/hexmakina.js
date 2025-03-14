@@ -12,11 +12,11 @@ announcer.classList.add('sr-only');
 document.body.appendChild(announcer);
 
 document.addEventListener('DOMContentLoaded', () => {
-  initializeDarkMode();
+  detectDarkModePreference();
   setupAccessibilityMenu();
-  setupEmailJs();
+  observeSectionTOC();
   HTMLExposed();
-  TOC();
+  setupEmailJs();
   announce('Page loaded');
 });
 
@@ -58,7 +58,7 @@ function setupEmailJs() {
   });
 }
 
-function TOC() {
+function observeSectionTOC() {
 
   // Get all section elements on the page
   const headers = document.querySelectorAll('section');
@@ -91,7 +91,8 @@ function TOC() {
   const observer = new IntersectionObserver(observerCallback, observerOptions);
   headers.forEach((header) => observer.observe(header));
 }
-function initializeDarkMode() {
+
+function detectDarkModePreference() {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const storedDarkMode = localStorage.getItem('darkMode');
   if (
