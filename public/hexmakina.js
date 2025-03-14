@@ -14,10 +14,49 @@ document.body.appendChild(announcer);
 document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
   setupAccessibilityMenu();
+  setupEmailJs();
   HTMLExposed();
   TOC();
   announce('Page loaded');
 });
+
+
+function setupEmailJs() {
+  const touchForm = document.getElementById('touch');
+
+  if (touchForm == null) return;
+
+  touchForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const script = document.createElement('script');
+    script.src =
+      'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    script.onload = function () {
+      emailjs.init({
+        publicKey: 'vaeVbxIew0k4eAJZc',
+      });
+
+      emailjs
+        .sendForm(
+          'emailjs_hexmakina_be',
+          'touch_hexmakina',
+          document.getElementById('touch')
+        )
+        .then(
+          () => announce('Your message has been sent successfully!', 'polite'),
+          (error) => {
+            console.error('FAILED...', error);
+            announce(
+              'There was an error sending your message. Please try again later.',
+              'assertive'
+            );
+          }
+        );
+    };
+    document.head.appendChild(script);
+  });
+}
 
 function TOC() {
   const nav = document.createElement('nav');
@@ -57,7 +96,7 @@ function TOC() {
   const observerCallback = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-      console.log(entry.target.id);
+        console.log(entry.target.id);
 
         navLinks.forEach((link) => {
           // Toggle 'active' class based on matching the header's id
@@ -100,25 +139,6 @@ function setupAccessibilityMenu() {
   });
 
   document.body.appendChild(accessibilityMenu);
-
-  // EmailJS
-  emailjs.init({
-    publicKey: 'vaeVbxIew0k4eAJZc',
-  });
-  document.getElementById('touch').addEventListener('submit', function (event) {
-    event.preventDefault();
-    // Sending the form using your service and template IDs
-    emailjs.sendForm('emailjs_hexmakina_be', 'touch_hexmakina', this).then(
-      () => {
-        console.log('SUCCESS!');
-        // Optionally, provide user feedback on success
-      },
-      (error) => {
-        console.log('FAILED...', error);
-        // Optionally, provide user feedback on error
-      }
-    );
-  });
 }
 
 function changeFontSize(root, delta) {
