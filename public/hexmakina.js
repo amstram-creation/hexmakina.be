@@ -5,21 +5,17 @@ const MIN_FONT_RATIO = 0.5;
 const MAX_FONT_RATIO = 5;
 const FONT_SIZE_DELTA = 0.1;
 
-const announcer = document.createElement('div');
-announcer.setAttribute('aria-live', 'polite');
-announcer.setAttribute('aria-atomic', 'true');
-announcer.classList.add('sr-only');
-document.body.appendChild(announcer);
+let announcer;
 
 document.addEventListener('DOMContentLoaded', () => {
   detectDarkModePreference();
   setupAccessibilityMenu();
+  
   observeSectionTOC();
   HTMLExposed();
   setupEmailJs();
   announce('Page loaded');
 });
-
 
 function setupEmailJs() {
   const touchForm = document.getElementById('touch');
@@ -59,7 +55,6 @@ function setupEmailJs() {
 }
 
 function observeSectionTOC() {
-
   // Get all section elements on the page
   const headers = document.querySelectorAll('section');
 
@@ -101,6 +96,12 @@ function detectDarkModePreference() {
   ) {
     document.body.classList.add(DARK_MODE_CLASS);
   }
+}
+
+function setupAnnouncer() {
+  const template = document.getElementById('announcer_template');
+  announcer = template.content.firstElementChild.cloneNode(true);
+  document.body.appendChild(announcer);
 }
 
 function setupAccessibilityMenu() {
@@ -145,6 +146,8 @@ function toggleDarkModeWithAnnouncement() {
 }
 
 function announce(message, priority = 'polite') {
+  if(!announcer) setupAnnouncer();
+
   announcer.setAttribute('aria-live', priority);
   setTimeout(() => {
     announcer.textContent = message;
