@@ -60,6 +60,7 @@ const Kortex = {
         element: template.content.firstElementChild.cloneNode(true),
 
         announce(message, priority = 'polite') {
+          console.log(`[${priority}] ${message}`);
           this.element.setAttribute('aria-live', priority);
 
           // Use clean timeouts to prevent race conditions
@@ -210,6 +211,19 @@ const Kortex = {
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+
+      // Form validation: Check if the message field is not empty.
+      const messageField = form.querySelector('#message');
+      if (!messageField.value.trim()) {
+        Kortex.announce(
+          'Please enter a message before submitting.',
+          'assertive'
+        );
+        messageField.focus();
+        return; // Halt submission if validation fails
+      }
+
+      // Optionally, you could add more validations for additional fields here
 
       const script = document.createElement('script');
       script.src = CONFIG.EMAIL.SCRIPT_SRC;
