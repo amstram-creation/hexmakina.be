@@ -1,4 +1,4 @@
-// Constants
+// Constants remain the same
 const CONFIG = {
   DARK_MODE: {
     CLASS: 'dark-mode',
@@ -39,6 +39,8 @@ const Kortex = {
     this.accessibility.setupAnnouncer();
 
     this.navigation.observeSectionTOC();
+    this.navigation.delegateNavigationEvents(); // Added event delegation for navigation
+
     this.setupEmailJs();
     this.exposeHTMLTags();
 
@@ -176,6 +178,29 @@ const Kortex = {
       }, observerOptions);
 
       sections.forEach((section) => observer.observe(section));
+    },
+
+    // New function using event delegation for navigation links
+    delegateNavigationEvents() {
+      const navContainer = document.querySelector('nav');
+      if (!navContainer) return;
+
+      navContainer.addEventListener('click', (event) => {
+        // Check if the clicked element or one of its ancestors is an <a> element.
+        const link = event.target.closest('a');
+        if (!link || !navContainer.contains(link)) return;
+
+        event.preventDefault();
+
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const sectionId = href.substring(1);
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
     },
   },
 
