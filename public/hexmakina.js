@@ -34,21 +34,28 @@ const Kortex = {
   announcer: null,
 
   init() {
-    this.accessibility.detectDarkModePreference();
-    this.accessibility.setupControls();
-    this.accessibility.setupAnnouncer();
+    try {
+      this.accessibility.detectDarkModePreference();
+      this.accessibility.setupControls();
+      this.accessibility.setupAnnouncer();
 
-    this.navigation.observeSectionTOC();
-    this.navigation.delegateNavigationEvents(); // Added event delegation for navigation
+      this.navigation.observeSectionTOC();
+      this.navigation.delegateNavigationEvents(); // Added event delegation for navigation
 
-    this.setupEmailJs();
-    this.exposeHTMLTags();
+      this.setupEmailJs();
+      this.exposeHTMLTags();
 
-    this.announce('Page loaded');
+      this.announce('Page loaded');
+    } catch (error) {
+      console.error('Initialization error:', error);
+      this.announce('An error occurred during initialization', 'assertive');
+    }
   },
 
   announce(message, priority = 'polite') {
-    if (Kortex.announcer) Kortex.announcer.announce(message, priority);
+    if (Kortex.announcer) {
+      Kortex.announcer.announce(message, priority);
+    }
   },
 
   accessibility: {
@@ -58,7 +65,6 @@ const Kortex = {
 
       Kortex.announcer = {
         element: template.content.firstElementChild.cloneNode(true),
-
         announce(message, priority = 'polite') {
           console.log(`[${priority}] ${message}`);
           this.element.setAttribute('aria-live', priority);
@@ -166,16 +172,16 @@ const Kortex = {
       };
 
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((link) => {
-              link.classList.toggle(
-                'active',
-                link.getAttribute('href') === '#' + entry.target.id
-              );
-            });
-          }
-        });
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => {
+                link.classList.toggle(
+                  'active',
+                  link.getAttribute('href') === '#' + entry.target.id
+                );
+              });
+            }
+          });
       }, observerOptions);
 
       sections.forEach((section) => observer.observe(section));
@@ -210,49 +216,75 @@ const Kortex = {
     if (!form) return;
 
     form.addEventListener('submit', (event) => {
-      event.preventDefault();
+      try {
+        event.preventDefault();
 
-      // Form validation: Check if the message field is not empty.
-      const messageField = form.querySelector('#message');
-      if (!messageField.value.trim()) {
+        // Form validation: Check if the message field is not empty.
+        const messageField = form.querySelector('#message');
+        if (!messageField.value.trim()) {
+          Kortex.announce(
+            'Please enter a message before submitting.',
+            'assertive'
+          );
+          messageField.focus();
+          return; // Halt submission if validation fails
+        }
+
+        // Optionally, you could add more validations for additional fields here
+
+        // Dynamically load EmailJS script
+        const script = document.createElement('script');
+        script.src = CONFIG.EMAIL.SCRIPT_SRC;
+        script.async = true;
+
+        script.onload = () => {
+          try {
+            emailjs.init({
+              publicKey: CONFIG.EMAIL.PUBLIC_KEY,
+            });
+
+            emailjs
+              .sendForm(CONFIG.EMAIL.SERVICE_ID, CONFIG.EMAIL.TEMPLATE_ID, form)
+              .then(
+                () => {
+                  Kortex.announce(
+                    'Your message has been sent successfully!',
+                    'polite'
+                  );
+                },
+                (error) => {
+                  console.error('Email submission failed:', error);
+                  Kortex.announce(
+                    'There was an error sending your message. Please try again later.',
+                    'assertive'
+                  );
+                }
+              );
+          } catch (error) {
+            console.error('Error during emailjs execution:', error);
+            Kortex.announce(
+              'An unexpected error occurred while sending your message.',
+              'assertive'
+            );
+          }
+        };
+
+        script.onerror = () => {
+          console.error('Failed to load EmailJS script.');
+          Kortex.announce(
+            'Failed to load email service. Please try again later.',
+            'assertive'
+          );
+        };
+
+        document.head.appendChild(script);
+      } catch (error) {
+        console.error('Error in email form submission handler:', error);
         Kortex.announce(
-          'Please enter a message before submitting.',
+          'An error occurred during form submission.',
           'assertive'
         );
-        messageField.focus();
-        return; // Halt submission if validation fails
       }
-
-      // Optionally, you could add more validations for additional fields here
-
-      const script = document.createElement('script');
-      script.src = CONFIG.EMAIL.SCRIPT_SRC;
-
-      script.onload = () => {
-        emailjs.init({
-          publicKey: CONFIG.EMAIL.PUBLIC_KEY,
-        });
-
-        emailjs
-          .sendForm(CONFIG.EMAIL.SERVICE_ID, CONFIG.EMAIL.TEMPLATE_ID, form)
-          .then(
-            () => {
-              Kortex.announce(
-                'Your message has been sent successfully!',
-                'polite'
-              );
-            },
-            (error) => {
-              console.error('Email submission failed:', error);
-              Kortex.announce(
-                'There was an error sending your message. Please try again later.',
-                'assertive'
-              );
-            }
-          );
-      };
-
-      document.head.appendChild(script);
     });
   },
 
@@ -267,4 +299,6 @@ const Kortex = {
 };
 
 // Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', () => Kortex.init());
+document.addEventListener('DOMContentLoaded', () => {
+  Kortex.init();
+});
