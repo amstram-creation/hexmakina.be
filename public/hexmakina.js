@@ -24,6 +24,7 @@ const CONFIG = {
 
 // Core application
 const Kortex = {
+  
   announcer: null,
 
   init() {
@@ -32,10 +33,10 @@ const Kortex = {
       this.accessibility.setupControls();
       this.accessibility.setupAnnouncer();
 
-      this.navigation.observeSectionTOC();
+      this.ui.observeSectionTOC();
+      this.ui.exposeHTMLTags();
 
       this.email.setupContactForm();
-      this.exposeHTMLTags();
 
       this.announce('Page loaded');
     } catch (error) {
@@ -144,34 +145,6 @@ const Kortex = {
     },
   },
 
-  navigation: {
-    observeSectionTOC() {
-      const navLinks = document.querySelectorAll('nav a');
-      const sections = document.querySelectorAll('section');
-
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6,
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((link) => {
-              link.classList.toggle(
-                'active',
-                link.getAttribute('href') === '#' + entry.target.id
-              );
-            });
-          }
-        });
-      }, observerOptions);
-
-      sections.forEach((section) => observer.observe(section));
-    },
-  },
-
   email: {
     setupContactForm() {
       const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
@@ -226,13 +199,40 @@ const Kortex = {
     },
   },
 
-  exposeHTMLTags() {
-    // Consider making this conditional based on a debug flag
-    document.querySelectorAll('*').forEach((element) => {
-      if (!element.closest('[data-not-exposed]')) {
-        element.setAttribute('data-tag', element.tagName.toLowerCase());
-      }
-    });
+  ui: {
+    observeSectionTOC() {
+      const navLinks = document.querySelectorAll('nav a');
+      const sections = document.querySelectorAll('section');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.toggle(
+                'active',
+                link.getAttribute('href') === '#' + entry.target.id
+              );
+            });
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer.observe(section));
+    },
+    exposeHTMLTags() {
+      // Consider making this conditional based on a debug flag
+      document.querySelectorAll('*').forEach((element) => {
+        if (!element.closest('[data-not-exposed]')) {
+          element.setAttribute('data-tag', element.tagName.toLowerCase());
+        }
+      });
+    },
   },
 };
 
