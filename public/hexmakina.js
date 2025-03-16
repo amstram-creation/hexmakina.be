@@ -34,7 +34,7 @@ const Kortex = {
 
       this.navigation.observeSectionTOC();
 
-      this.setupEmailJs();
+      this.email.setupContactForm();
       this.exposeHTMLTags();
 
       this.announce('Page loaded');
@@ -172,56 +172,58 @@ const Kortex = {
     },
   },
 
-  setupEmailJs() {
-    const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
-    if (!form) return;
+  email: {
+    setupContactForm() {
+      const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
+      if (!form) return;
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-      try {
-        // Form validation
-        const messageField = form.querySelector('#message');
-        if (!messageField.value.trim()) {
-          throw new Error('Please enter a message before submitting.');
+        try {
+          // Form validation
+          const messageField = form.querySelector('#message');
+          if (!messageField.value.trim()) {
+            throw new Error('Please enter a message before submitting.');
+          }
+
+          // Load EmailJS script
+          await this.loadEmailJsScript();
+
+          // Initialize and send email
+          emailjs.init({ publicKey: CONFIG.EMAIL.PUBLIC_KEY });
+
+          await emailjs.sendForm(
+            CONFIG.EMAIL.SERVICE_ID,
+            CONFIG.EMAIL.TEMPLATE_ID,
+            form
+          );
+
+          Kortex.announce('Your message has been sent successfully!', 'polite');
+        } catch (error) {
+          console.error('Email submission error:', error);
+          Kortex.announce(
+            error.message || 'An error occurred during form submission.',
+            'assertive'
+          );
         }
+      });
+    },
 
-        // Load EmailJS script
-        await this.loadEmailJsScript();
-
-        // Initialize and send email
-        emailjs.init({ publicKey: CONFIG.EMAIL.PUBLIC_KEY });
-
-        await emailjs.sendForm(
-          CONFIG.EMAIL.SERVICE_ID,
-          CONFIG.EMAIL.TEMPLATE_ID,
-          form
-        );
-
-        Kortex.announce('Your message has been sent successfully!', 'polite');
-      } catch (error) {
-        console.error('Email submission error:', error);
-        Kortex.announce(
-          error.message || 'An error occurred during form submission.',
-          'assertive'
-        );
-      }
-    });
-  },
-
-  // Helper function to load EmailJS script
-  async loadEmailJsScript() {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = CONFIG.EMAIL.SCRIPT_SRC;
-      script.async = true;
-      script.onload = resolve;
-      script.onerror = () =>
-        reject(
-          new Error('Failed to load email service. Please try again later.')
-        );
-      document.head.appendChild(script);
-    });
+    // Helper function to load EmailJS script
+    async loadEmailJsScript() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = CONFIG.EMAIL.SCRIPT_SRC;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = () =>
+          reject(
+            new Error('Failed to load email service. Please try again later.')
+          );
+        document.head.appendChild(script);
+      });
+    },
   },
 
   exposeHTMLTags() {
