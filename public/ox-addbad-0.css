@@ -75,6 +75,10 @@ section {
     padding: var(--size-xs);
 }
 
+section{
+    margin: var(--addbad-periodic) auto;
+}
+
 header {
     display: flex;
     flex-direction: column;
@@ -102,6 +106,7 @@ footer {
     width: 100%;
     aspect-ratio: 1/1;
 }
+
 h1,
 h2,
 h3 {
@@ -179,11 +184,7 @@ nav{
     background-color: var(--fg-primary);
 }
 
-section {
-    margin: var(--addbad-periodic) auto;
-    max-width: var(--douglas-adams);
-    padding: var(--size-xs);
-}
+
 
 section>h3,
 section>h4,
