@@ -12,8 +12,6 @@ const CONFIG = {
     ANNOUNCER_TPL: 'announcer_template',
     ACCESSIBILITY_TPL: 'accessibility_controls',
     CONTACT_FORM: 'touch',
-    SECTIONS: 'section',
-    NAV_LINKS: 'nav a',
   },
   EMAIL: {
     SERVICE_ID: 'emailjs_hexmakina_be',
@@ -35,7 +33,6 @@ const Kortex = {
       this.accessibility.setupAnnouncer();
 
       this.navigation.observeSectionTOC();
-      this.navigation.delegateNavigationEvents(); // Added event delegation for navigation
 
       this.setupEmailJs();
       this.exposeHTMLTags();
@@ -142,19 +139,15 @@ const Kortex = {
         storedDarkMode !== 'false' &&
         (storedDarkMode === 'true' || prefersDark)
       ) {
-        document
-          .querySelector('html')
-          .setAttribute(CONFIG.DARK_MODE, '');
+        document.querySelector('html').setAttribute(CONFIG.DARK_MODE, '');
       }
     },
   },
 
   navigation: {
     observeSectionTOC() {
-      const sections = document.querySelectorAll(CONFIG.SELECTORS.SECTIONS);
-      const navLinks = document.querySelectorAll(CONFIG.SELECTORS.NAV_LINKS);
-
-      if (!sections.length || !navLinks.length) return;
+      const navLinks = document.querySelectorAll('nav a');
+      const sections = document.querySelectorAll('section');
 
       const observerOptions = {
         root: null,
@@ -177,105 +170,57 @@ const Kortex = {
 
       sections.forEach((section) => observer.observe(section));
     },
-
-    // New function using event delegation for navigation links
-    delegateNavigationEvents() {
-      const navContainer = document.querySelector('nav');
-      if (!navContainer) return;
-
-      navContainer.addEventListener('click', (event) => {
-        // Check if the clicked element or one of its ancestors is an <a> element.
-        const link = event.target.closest('a');
-        if (!link || !navContainer.contains(link)) return;
-
-        event.preventDefault();
-
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          const sectionId = href.substring(1);
-          const section = document.getElementById(sectionId);
-          if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      });
-    },
   },
 
   setupEmailJs() {
     const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
     if (!form) return;
 
-    form.addEventListener('submit', (event) => {
-      try {
-        event.preventDefault();
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-        // Form validation: Check if the message field is not empty.
+      try {
+        // Form validation
         const messageField = form.querySelector('#message');
         if (!messageField.value.trim()) {
-          Kortex.announce(
-            'Please enter a message before submitting.',
-            'assertive'
-          );
-          messageField.focus();
-          return; // Halt submission if validation fails
+          throw new Error('Please enter a message before submitting.');
         }
 
-        // Optionally, you could add more validations for additional fields here
+        // Load EmailJS script
+        await this.loadEmailJsScript();
 
-        // Dynamically load EmailJS script
-        const script = document.createElement('script');
-        script.src = CONFIG.EMAIL.SCRIPT_SRC;
-        script.async = true;
+        // Initialize and send email
+        emailjs.init({ publicKey: CONFIG.EMAIL.PUBLIC_KEY });
 
-        script.onload = () => {
-          try {
-            emailjs.init({
-              publicKey: CONFIG.EMAIL.PUBLIC_KEY,
-            });
+        await emailjs.sendForm(
+          CONFIG.EMAIL.SERVICE_ID,
+          CONFIG.EMAIL.TEMPLATE_ID,
+          form
+        );
 
-            emailjs
-              .sendForm(CONFIG.EMAIL.SERVICE_ID, CONFIG.EMAIL.TEMPLATE_ID, form)
-              .then(
-                () => {
-                  Kortex.announce(
-                    'Your message has been sent successfully!',
-                    'polite'
-                  );
-                },
-                (error) => {
-                  console.error('Email submission failed:', error);
-                  Kortex.announce(
-                    'There was an error sending your message. Please try again later.',
-                    'assertive'
-                  );
-                }
-              );
-          } catch (error) {
-            console.error('Error during emailjs execution:', error);
-            Kortex.announce(
-              'An unexpected error occurred while sending your message.',
-              'assertive'
-            );
-          }
-        };
-
-        script.onerror = () => {
-          console.error('Failed to load EmailJS script.');
-          Kortex.announce(
-            'Failed to load email service. Please try again later.',
-            'assertive'
-          );
-        };
-
-        document.head.appendChild(script);
+        Kortex.announce('Your message has been sent successfully!', 'polite');
       } catch (error) {
-        console.error('Error in email form submission handler:', error);
+        console.error('Email submission error:', error);
         Kortex.announce(
-          'An error occurred during form submission.',
+          error.message || 'An error occurred during form submission.',
           'assertive'
         );
       }
+    });
+  },
+
+  // Helper function to load EmailJS script
+  async loadEmailJsScript() {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = CONFIG.EMAIL.SCRIPT_SRC;
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = () =>
+        reject(
+          new Error('Failed to load email service. Please try again later.')
+        );
+      document.head.appendChild(script);
     });
   },
 
