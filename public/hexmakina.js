@@ -1,11 +1,6 @@
 // Constants remain the same
 const CONFIG = {
-  DARK_MODE: {
-    CLASS: 'dark-mode',
-    STORAGE_KEY: 'darkMode',
-    DATA_ATTR: 'data-theme',
-    THEME_VALUE: 'dark',
-  },
+  DARK_MODE: 'data-dark-mode',
   FONT: {
     SIZE_VAR: '--ox-font-size',
     RATIO_VAR: '--ox-font-ratio',
@@ -124,36 +119,32 @@ const Kortex = {
 
     toggleDarkMode() {
       const html = document.querySelector('html');
-      const isDark =
-        html.getAttribute(CONFIG.DARK_MODE.DATA_ATTR) ===
-        CONFIG.DARK_MODE.THEME_VALUE;
+      const isDark = html.hasAttribute(CONFIG.DARK_MODE);
 
       if (isDark) {
-        html.removeAttribute(CONFIG.DARK_MODE.DATA_ATTR);
+        html.removeAttribute(CONFIG.DARK_MODE);
       } else {
-        html.setAttribute(
-          CONFIG.DARK_MODE.DATA_ATTR,
-          CONFIG.DARK_MODE.THEME_VALUE
-        );
+        html.setAttribute(CONFIG.DARK_MODE, '');
       }
 
-      const isEnabled = html.hasAttribute(CONFIG.DARK_MODE.DATA_ATTR);
-      localStorage.setItem(CONFIG.DARK_MODE.STORAGE_KEY, isEnabled);
+      localStorage.setItem(CONFIG.DARK_MODE, !isDark);
 
-      Kortex.announce(`Dark mode ${isEnabled ? 'enabled' : 'disabled'}`);
+      Kortex.announce(`Dark mode ${!isDark ? 'enabled' : 'disabled'}`);
     },
 
     detectDarkModePreference() {
       const prefersDark = window.matchMedia(
         '(prefers-color-scheme: dark)'
       ).matches;
-      const storedDarkMode = localStorage.getItem(CONFIG.DARK_MODE.STORAGE_KEY);
+      const storedDarkMode = localStorage.getItem(CONFIG.DARK_MODE);
 
       if (
         storedDarkMode !== 'false' &&
         (storedDarkMode === 'true' || prefersDark)
       ) {
-        document.body.classList.add(CONFIG.DARK_MODE.CLASS);
+        document
+          .querySelector('html')
+          .setAttribute(CONFIG.DARK_MODE, '');
       }
     },
   },
@@ -172,16 +163,16 @@ const Kortex = {
       };
 
       const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              navLinks.forEach((link) => {
-                link.classList.toggle(
-                  'active',
-                  link.getAttribute('href') === '#' + entry.target.id
-                );
-              });
-            }
-          });
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.toggle(
+                'active',
+                link.getAttribute('href') === '#' + entry.target.id
+              );
+            });
+          }
+        });
       }, observerOptions);
 
       sections.forEach((section) => observer.observe(section));

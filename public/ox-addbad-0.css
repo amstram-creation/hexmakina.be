@@ -42,7 +42,7 @@
 }
 
 /* Dark mode */
-[data-theme="dark"] {
+[data-dark-mode] {
     --bg-primary: #101010;
     --bg-secondary: #211121;
 
