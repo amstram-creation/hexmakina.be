@@ -11,9 +11,9 @@ const CONFIG = {
   SELECTORS: {
     ANNOUNCER_TPL: 'announcer_template',
     ACCESSIBILITY_TPL: 'accessibility_controls',
-    CONTACT_FORM: 'touch',
   },
   EMAIL: {
+    CONTACT_FORM: '#touch',
     SERVICE_ID: 'emailjs_hexmakina_be',
     TEMPLATE_ID: 'touch_hexmakina',
     SCRIPT_SRC:
@@ -148,7 +148,7 @@ const Kortex = {
 
   email: {
     setupContactForm() {
-      const form = document.getElementById(CONFIG.SELECTORS.CONTACT_FORM);
+      const form = document.querySelector(CONFIG.EMAIL.CONTACT_FORM);
       if (!form) return;
 
       form.addEventListener('submit', async (event) => {
