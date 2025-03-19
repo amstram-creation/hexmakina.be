@@ -24,7 +24,6 @@ const CONFIG = {
 
 // Core application
 const Kortex = {
-  
   announcer: null,
 
   init() {
@@ -33,11 +32,11 @@ const Kortex = {
       this.accessibility.setupControls();
       this.accessibility.setupAnnouncer();
 
-      this.ui.observeSectionTOC();
+      this.ui.observeNavigation();
       this.ui.exposeHTMLTags();
 
       setInterval(this.ui.cycleAddbadListItems, 1618); // adjust interval as desired
-      
+
       this.email.setupContactForm();
 
       this.announce('Page loaded');
@@ -202,31 +201,35 @@ const Kortex = {
   },
 
   ui: {
-    observeSectionTOC() {
-      const navLinks = document.querySelectorAll('nav a');
-      const sections = document.querySelectorAll('section');
+    __activationObserver(navLinks) {
       const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.6,
+        threshold: 0.2,
       };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((link) => {
-              link.classList.toggle(
-                'active',
-                link.getAttribute('href') === '#' + entry.target.id
-              );
-            });
-          }
-        });
+      return new IntersectionObserver((entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+        if (visibleEntry) {
+          navLinks.forEach((link) => {
+            link.classList.toggle(
+              'active',
+              link.getAttribute('href') === '#' + visibleEntry.target.id
+            );
+          });
+        }
       }, observerOptions);
-
-      sections.forEach((section) => observer.observe(section));
     },
-    
+
+    observeNavigation() {
+      const navLinks = document.querySelectorAll('nav a');
+      const observer = Kortex.ui.__activationObserver(navLinks);
+
+      document
+        .querySelectorAll('section')
+        .forEach((section) => observer.observe(section));
+    },
+
     exposeHTMLTags() {
       // Consider making this conditional based on a debug flag
       document.querySelectorAll(':not(template)').forEach((element) => {
@@ -246,8 +249,8 @@ const Kortex = {
         firstItem.classList.remove('fade');
         firstItem.removeEventListener('transitionend', handler);
       });
-    }
-  }
+    },
+  },
 };
 
 // Initialize on DOM ready
