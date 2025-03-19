@@ -36,6 +36,8 @@ const Kortex = {
       this.ui.observeSectionTOC();
       this.ui.exposeHTMLTags();
 
+      setInterval(this.ui.cycleAddbadListItems, 1618); // adjust interval as desired
+      
       this.email.setupContactForm();
 
       this.announce('Page loaded');
@@ -203,7 +205,6 @@ const Kortex = {
     observeSectionTOC() {
       const navLinks = document.querySelectorAll('nav a');
       const sections = document.querySelectorAll('section');
-
       const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -225,15 +226,28 @@ const Kortex = {
 
       sections.forEach((section) => observer.observe(section));
     },
+    
     exposeHTMLTags() {
       // Consider making this conditional based on a debug flag
-      document.querySelectorAll('*').forEach((element) => {
+      document.querySelectorAll(':not(template)').forEach((element) => {
         if (!element.closest('[data-not-exposed]')) {
           element.setAttribute('data-tag', element.tagName.toLowerCase());
         }
       });
     },
-  },
+    cycleAddbadListItems() {
+      const ol = document.querySelector('#how ol');
+      const firstItem = ol.firstElementChild;
+
+      firstItem.classList.add('fade');
+
+      firstItem.addEventListener('transitionend', function handler() {
+        ol.appendChild(firstItem);
+        firstItem.classList.remove('fade');
+        firstItem.removeEventListener('transitionend', handler);
+      });
+    }
+  }
 };
 
 // Initialize on DOM ready
