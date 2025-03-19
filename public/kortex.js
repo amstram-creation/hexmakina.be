@@ -84,10 +84,13 @@ const Kortex = {
 
       const actions = {
         'font-size font-larger': () =>
-          this.changeFontSize(document.documentElement, CONFIG.FONT.DELTA),
+          Kortex.ui.changeFontSize(document.documentElement, CONFIG.FONT.DELTA),
         'font-size font-smaller': () =>
-          this.changeFontSize(document.documentElement, -CONFIG.FONT.DELTA),
-        'dark-mode': () => this.toggleDarkMode(),
+          Kortex.ui.changeFontSize(
+            document.documentElement,
+            -CONFIG.FONT.DELTA
+          ),
+        'dark-mode': () => Kortex.ui.toggleDarkMode(),
       };
 
       menu.querySelectorAll('button').forEach((button) => {
@@ -98,37 +101,6 @@ const Kortex = {
       });
 
       document.body.appendChild(menu);
-    },
-
-    changeFontSize(root, delta) {
-      const currentRatio =
-        parseFloat(
-          getComputedStyle(root).getPropertyValue(CONFIG.FONT.RATIO_VAR)
-        ) || 1;
-
-      const newSize = Math.max(
-        CONFIG.FONT.MIN_RATIO,
-        Math.min(CONFIG.FONT.MAX_RATIO, currentRatio + delta)
-      );
-
-      root.style.setProperty(CONFIG.FONT.RATIO_VAR, `${newSize.toFixed(2)}`);
-
-      Kortex.announce(`Font size changed to ${newSize}rem`);
-    },
-
-    toggleDarkMode() {
-      const html = document.querySelector('html');
-      const isDark = html.hasAttribute(CONFIG.DARK_MODE);
-
-      if (isDark) {
-        html.removeAttribute(CONFIG.DARK_MODE);
-      } else {
-        html.setAttribute(CONFIG.DARK_MODE, '');
-      }
-
-      localStorage.setItem(CONFIG.DARK_MODE, !isDark);
-
-      Kortex.announce(`Dark mode ${!isDark ? 'enabled' : 'disabled'}`);
     },
 
     detectDarkModePreference() {
@@ -238,6 +210,7 @@ const Kortex = {
         }
       });
     },
+
     cycleAddbadListItems() {
       const ol = document.querySelector('#how ol');
       const firstItem = ol.firstElementChild;
@@ -249,6 +222,37 @@ const Kortex = {
         firstItem.classList.remove('fade');
         firstItem.removeEventListener('transitionend', handler);
       });
+    },
+
+    changeFontSize(root, delta) {
+      const currentRatio =
+        parseFloat(
+          getComputedStyle(root).getPropertyValue(CONFIG.FONT.RATIO_VAR)
+        ) || 1;
+
+      const newSize = Math.max(
+        CONFIG.FONT.MIN_RATIO,
+        Math.min(CONFIG.FONT.MAX_RATIO, currentRatio + delta)
+      );
+
+      root.style.setProperty(CONFIG.FONT.RATIO_VAR, `${newSize.toFixed(2)}`);
+
+      Kortex.announce(`Font size changed to ${newSize}rem`);
+    },
+
+    toggleDarkMode() {
+      const html = document.querySelector('html');
+      const isDark = html.hasAttribute(CONFIG.DARK_MODE);
+
+      if (isDark) {
+        html.removeAttribute(CONFIG.DARK_MODE);
+      } else {
+        html.setAttribute(CONFIG.DARK_MODE, '');
+      }
+
+      localStorage.setItem(CONFIG.DARK_MODE, !isDark);
+
+      Kortex.announce(`Dark mode ${!isDark ? 'enabled' : 'disabled'}`);
     },
   },
 };
