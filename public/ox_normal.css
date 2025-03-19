@@ -111,3 +111,13 @@ select {
   border: none;
   outline: none;
 }
+
+
+
+#how ol li {
+  transition: opacity 0.2s ease;
+}
+
+.fade {
+  opacity: 0;
+}
