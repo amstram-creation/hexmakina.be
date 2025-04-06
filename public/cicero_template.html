@@ -1,0 +1,83 @@
+<!-- Cicero Templates -->
+<template id="cicero-templates">
+    <!-- Read Button Template -->
+    <button id="cicero-button" class="cicero-btn" aria-label="Read this content aloud">
+        🔊 Read Aloud
+    </button>
+
+    <!-- Stop Button Template -->
+    <div id="cicero-stop" class="cicero-stop">
+        <button class="cicero-stop-btn" aria-label="Stop reading aloud">
+            ⏹️ Stop Reading
+        </button>
+    </div>
+
+    <!-- Settings Panel Template -->
+    <div id="cicero-settings" class="cicero-settings-container">
+        <button class="cicero-settings-toggle" aria-label="Cicero Settings">
+            ⚙️
+        </button>
+
+        <div class="cicero-settings-panel">
+            <h3 class="cicero-settings-title">Reader Settings</h3>
+
+            <div class="cicero-setting-item">
+                <label for="cicero-voice-select">Voice:</label>
+                <select id="cicero-voice-select" class="cicero-select"></select>
+            </div>
+
+            <div class="cicero-setting-item">
+                <label for="cicero-rate-slider">
+                    Speed: <span id="cicero-rate-value">1</span>
+                </label>
+                <input type="range" id="cicero-rate-slider" class="cicero-slider" min="0.5" max="2" step="0.1"
+                    value="1">
+            </div>
+
+            <div class="cicero-setting-item">
+                <label for="cicero-pitch-slider">
+                    Pitch: <span id="cicero-pitch-value">1</span>
+                </label>
+                <input type="range" id="cicero-pitch-slider" class="cicero-slider" min="0.5" max="2" step="0.1"
+                    value="1">
+            </div>
+
+            <div class="cicero-setting-item">
+                <label for="cicero-volume-slider">
+                    Volume: <span id="cicero-volume-value">1</span>
+                </label>
+                <input type="range" id="cicero-volume-slider" class="cicero-slider" min="0" max="1" step="0.1"
+                    value="1">
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Message Template -->
+    <div id="cicero-feedback" class="cicero-feedback">
+        Message text here
+    </div>
+</template>
+
+<!-- Example Usage -->
+<!-- 
+<link rel="stylesheet" href="cicero.css">
+<script src="cicero.js"></script>
+
+<div id="template-container"></div>
+<script>
+  // Load templates
+  const templateContainer = document.getElementById('template-container');
+  templateContainer.innerHTML = document.getElementById('cicero-templates-content').innerHTML;
+  
+  // Initialize Cicero
+  const cicero = Cicero.create({
+    selector: 'section', // CSS selector for content sections
+    rate: 1,
+    pitch: 1,
+    volume: 1
+  });
+  
+  // Cleanup when needed
+  // cicero.destroy();
+</script>
+-->

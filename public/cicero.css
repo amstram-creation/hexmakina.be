@@ -1,0 +1,181 @@
+/* Cicero Styles */
+
+/* Read Button */
+.cicero-btn {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.cicero-btn:hover {
+    background-color: #0056b3;
+}
+
+.cicero-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+/* Stop Button */
+.cicero-stop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: none;
+}
+
+.cicero-stop.cicero-visible {
+    display: block;
+}
+
+.cicero-stop-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #dc3545;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cicero-stop-btn:hover {
+    background-color: #b02a37;
+}
+
+.cicero-stop-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5);
+}
+
+/* Settings Panel */
+.cicero-settings-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9998;
+}
+
+.cicero-settings-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.cicero-settings-toggle:hover {
+    background-color: #0056b3;
+}
+
+.cicero-settings-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+.cicero-settings-panel {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 250px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+}
+
+.cicero-settings-panel.cicero-visible {
+    display: block;
+}
+
+.cicero-settings-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cicero-setting-item {
+    margin-bottom: 10px;
+}
+
+.cicero-setting-item:last-child {
+    margin-bottom: 0;
+}
+
+.cicero-setting-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.cicero-select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.cicero-slider {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Feedback Message */
+.cicero-feedback {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 14px;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cicero-feedback.cicero-visible {
+    opacity: 1;
+}
+
+.cicero-feedback.cicero-error {
+    background-color: #f44336;
+}
+
+/* Common visibility class */
+.cicero-visible {
+    display: block;
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cicero-settings-panel {
+        width: 200px;
+    }
+
+    .cicero-stop,
+    .cicero-feedback {
+        bottom: 70px;
+    }
+}
