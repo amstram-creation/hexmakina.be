@@ -121,3 +121,71 @@ select {
 .fade {
   opacity: 0;
 }
+
+
+/* Focus Management */
+:focus {
+  outline: none;
+  /* Remove default outline */
+}
+
+/* Keyboard navigation focus styles */
+.keyboard-navigation :focus {
+  outline: 2px solid #0066cc;
+  /* Blue outline */
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.25);
+  /* Optional glow effect */
+}
+
+/* Enhanced focus styles for interactive elements */
+.keyboard-navigation a:focus,
+.keyboard-navigation button:focus,
+.keyboard-navigation input:focus,
+.keyboard-navigation textarea:focus,
+.keyboard-navigation select:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+  border-radius: 2px;
+  text-decoration: underline;
+  /* Extra indicator for links */
+}
+
+/* Dark mode focus adjustments */
+[data-dark-mode] .keyboard-navigation :focus {
+  outline-color: #4db8ff;
+  box-shadow: 0 0 0 4px rgba(77, 184, 255, 0.25);
+}
+
+
+/* Enhanced focus for accessibility controls */
+.keyboard-navigation .accessibility-controls button:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.25);
+  transform: scale(1.05);
+  /* Subtle scale effect */
+}
+
+/* Skip link - hidden until focused */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: #ffffff;
+  color: #000000;
+  z-index: 1000;
+  transition: top 0.2s;
+}
+
+.keyboard-navigation .skip-link:focus {
+  top: 0;
+  outline: 2px solid #0066cc;
+}
+
+[data-dark-mode] .skip-link {
+  background: #121212;
+  color: #ffffff;
+}
+/* EOF setupFocusManagement */

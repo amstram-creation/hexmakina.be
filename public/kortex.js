@@ -1,17 +1,5 @@
 // Constants
 const CONFIG = {
-  DARK_MODE: 'data-dark-mode',
-  FONT: {
-    SIZE_VAR: '--ox-font-size',
-    RATIO_VAR: '--ox-font-ratio',
-    MIN_RATIO: 0.5,
-    MAX_RATIO: 5,
-    DELTA: 0.1,
-  },
-  SELECTORS: {
-    ANNOUNCER_TPL: 'announcer_template',
-    ACCESSIBILITY_TPL: 'accessibility_controls',
-  },
   EMAIL: {
     CONTACT_FORM: '#touch',
     SERVICE_ID: 'emailjs_hexmakina_be',
@@ -22,173 +10,40 @@ const CONFIG = {
   },
 };
 
-class Kortex {
+export default class Kortex {
   constructor() {
     this.announcer = null;
 
-    // Initialize submodules
-    this.accessibility = new Accessibility(this);
+    // Initialize submodules - fixed order to prevent dependency issues
     this.ui = new UI(this);
     this.email = new Email(this);
+
+    // Add Cicero bridge
+    this.cicero = {
+      read: (sectionId) =>
+        window.cicero ? window.cicero.start(sectionId) : null,
+      stop: () => (window.cicero ? window.cicero.stop() : null),
+      getStatus: () => ({
+        supported: window.cicero ? window.cicero.isSupported : false,
+        reading: window.cicero ? window.cicero.isReading() : false,
+      }),
+    };
   }
 
   init() {
     try {
-      this.accessibility.detectDarkModePreference();
-      this.accessibility.setupControls();
-      this.accessibility.setupAnnouncer();
-
       this.ui.observeNavigation();
       this.ui.exposeHTMLTags();
 
       setInterval(() => this.ui.cycleAddbadListItems(), 1618);
 
       this.email.setupContactForm();
-
-      this.announce('Page loaded');
     } catch (error) {
       console.error('Initialization error:', error);
-      this.announce('An error occurred during initialization', 'assertive');
-    }
-  }
-
-  announce(message, priority = 'polite') {
-    if (this.announcer) {
-      this.announcer.announce(message, priority);
-    }
-  }
-}
-
-class Accessibility {
-  constructor(kortex) {
-    this.kortex = kortex;
-  }
-
-  setupAnnouncer() {
-    const template = document.getElementById(CONFIG.SELECTORS.ANNOUNCER_TPL);
-    if (!template) return;
-
-    this.kortex.announcer = {
-      element: template.content.firstElementChild.cloneNode(true),
-      announce(message, priority = 'polite') {
-        console.log(`[${priority}] ${message}`);
-        this.element.setAttribute('aria-live', priority);
-
-        // Use clean timeouts to prevent race conditions
-        setTimeout(() => {
-          this.element.textContent = message;
-          setTimeout(() => (this.element.textContent = ''), 1000);
-        }, 100);
-      },
-    };
-
-    document.body.appendChild(this.kortex.announcer.element);
-  }
-
-  setupControls() {
-    const template = document.getElementById(
-      CONFIG.SELECTORS.ACCESSIBILITY_TPL
-    );
-    if (!template) return;
-
-    const menu = template.content.firstElementChild.cloneNode(true);
-
-    const actions = {
-      'font-size font-larger': () =>
-        this.kortex.ui.changeFontSize(
-          document.documentElement,
-          CONFIG.FONT.DELTA
-        ),
-      'font-size font-smaller': () =>
-        this.kortex.ui.changeFontSize(
-          document.documentElement,
-          -CONFIG.FONT.DELTA
-        ),
-      'dark-mode': () => this.kortex.ui.toggleDarkMode(),
-    };
-
-    menu.querySelectorAll('button').forEach((button) => {
-      button.addEventListener('click', () => {
-        const action = actions[button.dataset.fx];
-        if (action) action();
-      });
-    });
-
-    document.body.appendChild(menu);
-  }
-
-  detectDarkModePreference() {
-    const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    const storedDarkMode = localStorage.getItem(CONFIG.DARK_MODE);
-
-    if (
-      storedDarkMode !== 'false' &&
-      (storedDarkMode === 'true' || prefersDark)
-    ) {
-      document.querySelector('html').setAttribute(CONFIG.DARK_MODE, '');
-    }
-  }
-}
-
-class Email {
-  constructor(kortex) {
-    this.kortex = kortex;
-  }
-
-  setupContactForm() {
-    const form = document.querySelector(CONFIG.EMAIL.CONTACT_FORM);
-    if (!form) return;
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      try {
-        // Form validation
-        const messageField = form.querySelector('#message');
-        if (!messageField.value.trim()) {
-          throw new Error('Please enter a message before submitting.');
-        }
-
-        // Load EmailJS script
-        await this.loadEmailJsScript();
-
-        // Initialize and send email
-        emailjs.init({ publicKey: CONFIG.EMAIL.PUBLIC_KEY });
-
-        await emailjs.sendForm(
-          CONFIG.EMAIL.SERVICE_ID,
-          CONFIG.EMAIL.TEMPLATE_ID,
-          form
-        );
-
-        this.kortex.announce(
-          'Your message has been sent successfully!',
-          'polite'
-        );
-      } catch (error) {
-        console.error('Email submission error:', error);
-        this.kortex.announce(
-          error.message || 'An error occurred during form submission.',
-          'assertive'
-        );
+      if (this.ally) {
+        this.ally.announce('An error occurred during initialization', 'error');
       }
-    });
-  }
-
-  async loadEmailJsScript() {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = CONFIG.EMAIL.SCRIPT_SRC;
-      script.async = true;
-      script.onload = resolve;
-      script.onerror = () =>
-        reject(
-          new Error('Failed to load email service. Please try again later.')
-        );
-      document.head.appendChild(script);
-    });
+    }
   }
 }
 
@@ -250,42 +105,68 @@ class UI {
       firstItem.removeEventListener('transitionend', handler);
     });
   }
-
-  changeFontSize(root, delta) {
-    const currentRatio =
-      parseFloat(
-        getComputedStyle(root).getPropertyValue(CONFIG.FONT.RATIO_VAR)
-      ) || 1;
-
-    const newSize = Math.max(
-      CONFIG.FONT.MIN_RATIO,
-      Math.min(CONFIG.FONT.MAX_RATIO, currentRatio + delta)
-    );
-
-    root.style.setProperty(CONFIG.FONT.RATIO_VAR, `${newSize.toFixed(2)}`);
-
-    this.kortex.announce(`Font size changed to ${newSize}rem`);
-  }
-
-  toggleDarkMode() {
-    const html = document.querySelector('html');
-    const isDark = html.hasAttribute(CONFIG.DARK_MODE);
-
-    if (isDark) {
-      html.removeAttribute(CONFIG.DARK_MODE);
-    } else {
-      html.setAttribute(CONFIG.DARK_MODE, '');
-    }
-
-    localStorage.setItem(CONFIG.DARK_MODE, !isDark);
-
-    this.kortex.announce(`Dark mode ${!isDark ? 'enabled' : 'disabled'}`);
-  }
-
 }
 
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-  window.kortex = new Kortex();
-  window.kortex.init();
-});
+class Email {
+  constructor(kortex) {
+    this.kortex = kortex;
+  }
+
+  setupContactForm() {
+    const form = document.querySelector(CONFIG.EMAIL.CONTACT_FORM);
+    if (!form) return;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      try {
+        // Form validation
+        const messageField = form.querySelector('#message');
+        if (!messageField.value.trim()) {
+          throw new Error('Please enter a message before submitting.');
+        }
+
+        // Load EmailJS script
+        await this.loadEmailJsScript();
+
+        // Initialize and send email
+        emailjs.init({ publicKey: CONFIG.EMAIL.PUBLIC_KEY });
+
+        await emailjs.sendForm(
+          CONFIG.EMAIL.SERVICE_ID,
+          CONFIG.EMAIL.TEMPLATE_ID,
+          form
+        );
+
+        if (this.kortex.ally) {
+          this.kortex.ally.announce(
+            'Your message has been sent successfully!',
+            'polite'
+          );
+        }
+      } catch (error) {
+        console.error('Email submission error:', error);
+        if (this.kortex.ally) {
+          this.kortex.ally.announce(
+            error.message || 'An error occurred during form submission.',
+            'assertive'
+          );
+        }
+      }
+    });
+  }
+
+  async loadEmailJsScript() {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = CONFIG.EMAIL.SCRIPT_SRC;
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = () =>
+        reject(
+          new Error('Failed to load email service. Please try again later.')
+        );
+      document.head.appendChild(script);
+    });
+  }
+}

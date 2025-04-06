@@ -30,8 +30,9 @@
 
   <!-- Security and resource hints -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Updated CSP to allow EmailJS -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self' https://api.emailjs.com; img-src 'self' https:; style-src 'self'">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.responsivevoice.org; connect-src 'self' https://api.emailjs.com; img-src 'self' https:; style-src 'self' 'unsafe-inline'; form-action 'self'">
 
   <meta name="referrer" content="no-referrer-when-downgrade">
   <link rel="dns-prefetch" href="//hexmakina.be">
@@ -58,6 +59,7 @@
 
   <title>Hex Makina</title>
   <link rel="stylesheet" href="./public/hexmakina.css">
+  <link rel="stylesheet" href="./public/cicero.css">
 </head>
 
 <body>
@@ -216,7 +218,92 @@
     <div id="announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
   </template>
 
-  <script type="text/javascript" src="./public/kortex.js"></script>
+  <template id="cicero-templates">
+    <!-- Read Button Template -->
+    <button id="cicero-button" class="cicero-btn" aria-label="Read this content aloud">
+      🔊 Read Aloud
+    </button>
+
+    <!-- Stop Button Template -->
+    <div id="cicero-stop" class="cicero-stop">
+      <button class="cicero-stop-btn" aria-label="Stop reading aloud">
+        ⏹️ Stop Reading
+      </button>
+    </div>
+
+    <!-- Settings Panel Template -->
+    <div id="cicero-settings" class="cicero-settings-container">
+      <button class="cicero-settings-toggle" aria-label="Cicero Settings">
+        ⚙️
+      </button>
+
+      <div class="cicero-settings-panel">
+        <h3 class="cicero-settings-title">Reader Settings</h3>
+
+        <div class="cicero-setting-item">
+          <label for="cicero-voice-select">Voice:</label>
+          <select id="cicero-voice-select" class="cicero-select"></select>
+        </div>
+
+        <div class="cicero-setting-item">
+          <label for="cicero-rate-slider">
+            Speed: <span id="cicero-rate-value">1</span>
+          </label>
+          <input type="range" id="cicero-rate-slider" class="cicero-slider" min="0.5" max="2" step="0.1" value="1">
+        </div>
+
+        <div class="cicero-setting-item">
+          <label for="cicero-pitch-slider">
+            Pitch: <span id="cicero-pitch-value">1</span>
+          </label>
+          <input type="range" id="cicero-pitch-slider" class="cicero-slider" min="0.5" max="2" step="0.1" value="1">
+        </div>
+
+        <div class="cicero-setting-item">
+          <label for="cicero-volume-slider">
+            Volume: <span id="cicero-volume-value">1</span>
+          </label>
+          <input type="range" id="cicero-volume-slider" class="cicero-slider" min="0" max="1" step="0.1" value="1">
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Message Template -->
+    <div id="cicero-feedback" class="cicero-feedback">
+      Message text here
+    </div>
+  </template>
+  <script type="module">
+    // Updated script for index.html
+    import Kortex from './public/kortex.js';
+    import Ally from './public/ally.js';
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Kortex
+      window.kortex = new Kortex();
+      window.kortex.init();
+
+      // Load Ally directly since it's now a proper import
+      window.ally = new Ally(window.kortex);
+
+      // Dynamically load cicero.js and initialize Cicero once it's loaded
+      // (function () {
+      //   const script = document.createElement('script');
+      //   script.src = './public/cicero.js';
+      //   script.onload = function () {
+      //     window.cicero = Cicero.create({
+      //       selector: 'section', // Selector for the content sections
+      //       rate: 1.1, // Speech rate (0.5-2.0)
+      //       pitch: 1, // Speech pitch (0.5-2.0)
+      //       volume: 0.9, // Speech volume (0-1.0)
+      //     });
+      //   };
+      //   document.head.appendChild(script);
+      // })();
+    });
+  </script>
+  <script src="https://code.responsivevoice.org/responsivevoice.js?key=PkSxILIk"></script>
 </body>
 
 </html>
